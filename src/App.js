@@ -4,13 +4,11 @@ import Homepage from "./pages/homepage/Homepage";
 import Account from "./pages/account/Account";
 import { AuthContextProvider } from "./context/AuthContextProvider";
 import Protected from "./components/Protected";
-import Navbar from "./components/Navbar";
 
 function App() {
     return (
         <div>
             <AuthContextProvider>
-                <Navbar />
                 <Routes>
                     <Route path="/" element={<Homepage />} />
                     <Route path="/signin" element={<SignIn />} />
