@@ -4,6 +4,8 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-image: url("https://images.pexels.com/photos/5405649/pexels-photo-5405649.jpeg?cs=srgb&dl=pexels-taryn-elliott-5405649.jpg&fm=jpg");
+    background-size: cover;
 }
 
 .items {

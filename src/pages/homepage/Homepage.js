@@ -6,9 +6,11 @@ import { Container } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import "./Homepage.css";
 import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
     const { user, logOut } = UserAuth();
+    const navigate = useNavigate();
     const handleSignOut = async () => {
         try {
             await logOut();
@@ -26,9 +28,15 @@ const Homepage = () => {
             <div className="items">
                 <h1>HomePage</h1>
                 {user?.displayName ? (
-                    <button onClick={handleSignOut}>Logout</button>
+                    <Button onClick={handleSignOut}>Logout</Button>
                 ) : (
-                    <Link to="/signin">Sign in</Link>
+                    <Button
+                        onClick={() => {
+                            navigate("/signin");
+                        }}
+                    >
+                        Sign in
+                    </Button>
                 )}
             </div>
         </div>
