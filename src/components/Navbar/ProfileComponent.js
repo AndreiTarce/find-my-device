@@ -24,7 +24,7 @@ const ProfileComponent = () => {
                     Something
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <div className="d-grid">
+                <div className="d-grid px-2">
                     <LoginButton />
                 </div>
             </NavDropdown>

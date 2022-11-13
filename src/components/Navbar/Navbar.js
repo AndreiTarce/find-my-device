@@ -16,7 +16,7 @@ const Navbar = () => {
             variant="dark"
         >
             <Container>
-                <BootstrapNavbar.Brand href="#home">
+                <BootstrapNavbar.Brand href="/">
                     React-Bootstrap
                 </BootstrapNavbar.Brand>
                 <BootstrapNavbar.Toggle aria-controls="responsive-navbar-nav" />

@@ -1,5 +1,6 @@
 import React from "react";
 import LoginButton from "../../components/LoginButton";
+import Navbar from "../../components/Navbar/Navbar";
 import { UserAuth } from "../../context/AuthContextProvider";
 
 const Account = () => {
@@ -7,7 +8,7 @@ const Account = () => {
 
     return (
         <div>
-            <h1>Account</h1>
+            <Navbar />
             <div>
                 <p>Welcome, {user?.displayName}</p>
             </div>
