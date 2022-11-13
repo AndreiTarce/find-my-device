@@ -1,16 +1,9 @@
 import React from "react";
+import LoginButton from "../../components/LoginButton";
 import { UserAuth } from "../../context/AuthContextProvider";
 
 const Account = () => {
-    const { logOut, user } = UserAuth();
-
-    const handleSignOut = async () => {
-        try {
-            await logOut();
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    const { user } = UserAuth();
 
     return (
         <div>
@@ -18,7 +11,7 @@ const Account = () => {
             <div>
                 <p>Welcome, {user?.displayName}</p>
             </div>
-            <button onClick={handleSignOut}>Logout</button>
+            <LoginButton />
         </div>
     );
 };

@@ -1,0 +1,10 @@
+.vertical-center {
+    display: flex;
+    align-items: center;
+  }
+
+  .flexbox-centered{
+    display: flex;
+    align-items: center;
+    gap:10px;
+  }
