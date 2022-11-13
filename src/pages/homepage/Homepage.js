@@ -1,6 +1,3 @@
-import { todoListState } from "../../atoms/todoListState";
-import { useRecoilValue, useRecoilState } from "recoil";
-import { useState } from "react";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../../utils/firebase";
 import { Link } from "react-router-dom";
@@ -8,28 +5,10 @@ import { UserAuth } from "../../context/AuthContextProvider";
 import { Container } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import "./Homepage.css";
+import { Navigate } from "react-router-dom";
 
 const Homepage = () => {
     const { user, logOut } = UserAuth();
-    // const [state, setState] = useRecoilState(todoListState);
-    // const addTestData = async () => {
-    //     await setDoc(doc(db, "cities", "LA"), {
-    //         name: "Los Angeles",
-    //         state: "CA",
-    //         country: "USA",
-    //     });
-    // };
-
-    // const getDataTest = async () => {
-    //     const docRef = doc(db, "cities", "LA");
-    //     const docSnap = await getDoc(docRef);
-    //     if (docSnap.exists()) {
-    //         console.log("Document data:", docSnap.data());
-    //     } else {
-    //         // doc.data() will be undefined in this case
-    //         console.log("No such document!");
-    //     }
-    // };
     const handleSignOut = async () => {
         try {
             await logOut();
@@ -37,6 +16,11 @@ const Homepage = () => {
             console.log(error);
         }
     };
+
+    if (user) {
+        return <Navigate to="/dashboard" />;
+    }
+
     return (
         <div className="homepage">
             <div className="items">

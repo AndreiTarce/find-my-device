@@ -5,21 +5,16 @@ import Account from "./pages/account/Account";
 import { AuthContextProvider } from "./context/AuthContextProvider";
 import Protected from "./components/Protected";
 import Dashboard from "./pages/dashboard/Dashboard";
-import IsLoggedIn from "./components/IsLoggedIn";
+import LoggedInRouter from "./components/LoggedInRouter";
 
 function App() {
     return (
         <div>
             <AuthContextProvider>
                 <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <IsLoggedIn>
-                                <Homepage />
-                            </IsLoggedIn>
-                        }
-                    />
+                    <Route path="" element={<LoggedInRouter />} />
+                    <Route path="/" element={<LoggedInRouter />} />
+                    <Route path="/home" element={<Homepage />} />
                     <Route path="/signin" element={<SignIn />} />
                     <Route
                         path="/dashboard"
