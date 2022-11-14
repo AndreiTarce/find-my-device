@@ -8,7 +8,9 @@ const LoggedInRouter = () => {
         return <Navigate to="/home" />;
     }
 
-    return <Navigate to="/dashboard" />;
+    if (user) {
+        return <Navigate to="/dashboard" />;
+    }
 };
 
 export default LoggedInRouter;
