@@ -8,10 +8,6 @@ import LoginButton from "../../components/LoginButton";
 const Homepage = () => {
     const { user } = UserAuth();
 
-    if (user) {
-        return <Navigate to="/dashboard" />;
-    }
-
     return (
         <div className="homepage">
             <div className="items">
