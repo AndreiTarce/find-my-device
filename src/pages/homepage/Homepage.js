@@ -4,6 +4,7 @@ import { UserAuth } from "../../context/AuthContextProvider";
 import "./Homepage.css";
 import { Navigate } from "react-router-dom";
 import LoginButton from "../../components/LoginButton";
+import logoWhite from "../../assets/logo_white.png";
 
 const Homepage = () => {
     const { user } = UserAuth();
@@ -11,7 +12,7 @@ const Homepage = () => {
     return (
         <div className="homepage">
             <div className="items">
-                <h1>HomePage</h1>
+                <img src={logoWhite} />
                 <LoginButton />
             </div>
         </div>

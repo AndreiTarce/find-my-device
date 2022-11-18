@@ -10,7 +10,7 @@ const ProfileComponent = () => {
         <>
             <Image
                 roundedCircle
-                referrerpolicy="no-referrer"
+                referrerPolicy="no-referrer"
                 src={user.photoURL}
                 width={40}
                 height={40}
