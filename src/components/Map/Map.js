@@ -5,8 +5,6 @@ import { GoogleMap, useLoadScript, Marker, DirectionsRenderer } from "@react-goo
 import { useMemo, useEffect } from "react";
 import "./Map.css";
 import { Button, Container } from "react-bootstrap";
-import location from "../../assets/location.svg";
-import { pushAtSortPosition } from "array-push-at-sort-position";
 import RenderMapMarker from "./RenderMapMarker";
 
 const Map = () => {
@@ -32,14 +30,16 @@ const Map = () => {
 
     //real-time sensor data fetching
     useEffect(() => {
+        const q = query(collection(db, "date_senzor"));
         onSnapshot(
-            collection(db, "date_senzor"),
+            q,
             (querySnapshot) => {
                 const changes = querySnapshot.docChanges();
                 changes.forEach((change) => {
+                    console.log("change");
                     if (change.type === "added") {
+                        console.log("added");
                         addDateSenzor(change.doc.data());
-                        console.log(change.doc.data().time);
                     } else if (change.type === "removed") {
                         console.log("removed");
                     }
@@ -93,13 +93,6 @@ const Map = () => {
             >
                 +1 latitude
             </Button>
-            {dateSenzor.map((data, index) => (
-                <p key={index}>
-                    time:{data.time}
-                    latitude:{data.latitude}
-                    longitude:{data.longitude}
-                </p>
-            ))}
             <p>Distanta rutei:{distance}</p>
         </>
     );
