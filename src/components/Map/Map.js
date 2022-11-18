@@ -7,6 +7,7 @@ import "./Map.css";
 import { Button, Container } from "react-bootstrap";
 import location from "../../assets/location.svg";
 import { pushAtSortPosition } from "array-push-at-sort-position";
+import RenderMapMarker from "./RenderMapMarker";
 
 const Map = () => {
     const [dateSenzor, setDateSenzor] = useState([]);
@@ -76,19 +77,12 @@ const Map = () => {
     return (
         <>
             <GoogleMap
-                zoom={5}
+                zoom={15}
                 center={{ lat: parseFloat(latitude), lng: parseFloat(longitude) }}
                 mapContainerClassName="map-container"
                 options={options}
             >
-                <Marker position={{ lat: parseFloat(latitude), lng: parseFloat(longitude) }} icon={location} />
-                {dateSenzor.map((data, index) => (
-                    <Marker
-                        key={index}
-                        position={{ lat: parseFloat(data.latitude), lng: parseFloat(data.longitude) }}
-                        icon={location}
-                    />
-                ))}
+                <RenderMapMarker dateSenzor={dateSenzor} />
                 {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
             </GoogleMap>
             <Button onClick={calculateRoute}>Calculate route</Button>
