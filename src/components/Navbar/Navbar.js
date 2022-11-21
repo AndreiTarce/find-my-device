@@ -5,6 +5,7 @@ import { Navbar as BootstrapNavbar } from "react-bootstrap";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import LoginButton from "../LoginButton";
 import ProfileComponent from "./ProfileComponent";
+import logoWhite from "../../assets/logo_white.png";
 
 const Navbar = () => {
     return (
@@ -17,7 +18,7 @@ const Navbar = () => {
         >
             <Container>
                 <BootstrapNavbar.Brand href="/">
-                    React-Bootstrap
+                    <img src={logoWhite} height={30} />
                 </BootstrapNavbar.Brand>
                 <BootstrapNavbar.Toggle aria-controls="responsive-navbar-nav" />
                 <BootstrapNavbar.Collapse id="responsive-navbar-nav">
