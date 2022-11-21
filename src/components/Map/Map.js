@@ -6,14 +6,16 @@ import { useMemo, useEffect } from "react";
 import "./Map.css";
 import { Button, Container } from "react-bootstrap";
 import RenderMapMarker from "./RenderMapMarker";
+import { startRecording } from "./startRecording";
+import { UserAuth } from "../../context/AuthContextProvider";
 
 const Map = () => {
+    const { user } = UserAuth();
     const [dateSenzor, setDateSenzor] = useState([]);
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
 
     const [directionsResponse, setDirectionsResponse] = useState(null);
-    const [distance, setDistance] = useState("");
 
     const addDateSenzor = (newData) => {
         setDateSenzor((oldDateSenzor) => [
@@ -56,19 +58,6 @@ const Map = () => {
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     });
 
-    async function calculateRoute() {
-        // eslint-disable-next-line no-undef
-        const directionsService = new google.maps.DirectionsService();
-        const results = await directionsService.route({
-            origin: { lat: 46.777415, lng: 23.60673 },
-            destination: { lat: 46.756253, lng: 23.796576 },
-            // eslint-disable-next-line no-undef
-            travelMode: google.maps.TravelMode.WALKING,
-        });
-        setDirectionsResponse(results);
-        setDistance(results.routes[0].legs[0].distance.text);
-    }
-
     const options = useMemo(() => ({ mapId: "a1c984e18919c1dc" }));
 
     //rendering below
@@ -85,15 +74,7 @@ const Map = () => {
                 <RenderMapMarker dateSenzor={dateSenzor} />
                 {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
             </GoogleMap>
-            <Button onClick={calculateRoute}>Calculate route</Button>
-            <Button
-                onClick={() => {
-                    setLatitude(latitude + 1);
-                }}
-            >
-                +1 latitude
-            </Button>
-            <p>Distanta rutei:{distance}</p>
+            <Button onClick={() => startRecording({ user })}>Start recording route</Button>
         </>
     );
 };
