@@ -9,3 +9,10 @@ export const stopRecording = () => {
         type: "STOP_RECORDING",
     };
 };
+
+export const addSensorData = (data) => {
+    return {
+        type: "ADD_SENSOR_DATA",
+        payload: data,
+    };
+};

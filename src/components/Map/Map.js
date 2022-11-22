@@ -1,33 +1,25 @@
 import { db } from "../../utils/firebase";
-import { collection, getDocs, doc, onSnapshot, query, orderBy } from "firebase/firestore";
+import { collection, onSnapshot, query } from "firebase/firestore";
 import { useState } from "react";
-import { GoogleMap, useLoadScript, Marker, DirectionsRenderer } from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, DirectionsRenderer } from "@react-google-maps/api";
 import { useMemo, useEffect } from "react";
 import "./Map.css";
-import { Button, Container } from "react-bootstrap";
 import RenderMapMarker from "./RenderMapMarker";
 import { UserAuth } from "../../context/AuthContextProvider";
-import StartRecordingButton from "./StartRecordingButton";
+import { addSensorData } from "../../actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const Map = () => {
     const { user } = UserAuth();
-    const [dateSenzor, setDateSenzor] = useState([]);
+    const dateSenzor = useSelector((state) => state.sensorData);
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
+    const dispatch = useDispatch();
 
-    const [directionsResponse, setDirectionsResponse] = useState(null);
-
-    const addDateSenzor = (newData) => {
-        setDateSenzor((oldDateSenzor) => [
-            ...oldDateSenzor,
-            {
-                time: newData.time,
-                latitude: newData.latitude,
-                longitude: newData.longitude,
-            },
-        ]);
-        setLatitude(newData.latitude);
-        setLongitude(newData.longitude);
+    const addDateSenzor = (data) => {
+        dispatch(addSensorData(data));
+        setLatitude(data.latitude);
+        setLongitude(data.longitude);
     };
 
     //real-time sensor data fetching
@@ -35,17 +27,16 @@ const Map = () => {
         const q = query(collection(db, "date_senzor"));
         onSnapshot(
             q,
-            (querySnapshot) => {
+            async (querySnapshot) => {
                 const changes = querySnapshot.docChanges();
                 changes.forEach((change) => {
-                    console.log("change");
                     if (change.type === "added") {
-                        console.log("added");
                         addDateSenzor(change.doc.data());
                     } else if (change.type === "removed") {
                         console.log("removed");
                     }
                 });
+                dispatch({ type: "SORT_SENSOR_DATA" });
             },
             (error) => {
                 console.log(error);
@@ -72,9 +63,7 @@ const Map = () => {
                 options={options}
             >
                 <RenderMapMarker dateSenzor={dateSenzor} />
-                {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
             </GoogleMap>
-            <StartRecordingButton />
         </>
     );
 };
