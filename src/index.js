@@ -8,14 +8,18 @@ import { RecoilRoot } from "recoil";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
+import { createStore } from "redux";
+import rootReducer from "./reducers";
+import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 root.render(
-    <RecoilRoot>
+    <Provider store={store}>
         <BrowserRouter>
             <App />
         </BrowserRouter>
-    </RecoilRoot>
+    </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

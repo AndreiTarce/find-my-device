@@ -6,8 +6,8 @@ import { useMemo, useEffect } from "react";
 import "./Map.css";
 import { Button, Container } from "react-bootstrap";
 import RenderMapMarker from "./RenderMapMarker";
-import { startRecording } from "./startRecording";
 import { UserAuth } from "../../context/AuthContextProvider";
+import StartRecordingButton from "./StartRecordingButton";
 
 const Map = () => {
     const { user } = UserAuth();
@@ -74,7 +74,7 @@ const Map = () => {
                 <RenderMapMarker dateSenzor={dateSenzor} />
                 {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
             </GoogleMap>
-            <Button onClick={() => startRecording({ user })}>Start recording route</Button>
+            <StartRecordingButton />
         </>
     );
 };
