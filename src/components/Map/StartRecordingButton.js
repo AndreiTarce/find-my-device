@@ -22,16 +22,31 @@ const StartRecordingButton = () => {
     };
 
     useEffect(() => {
+        const data = window.sessionStorage.getItem("routeRecording");
+        console.log(data);
+        if (data == "true") {
+            dispatch(startRecording());
+        } else {
+            dispatch(stopRecording());
+        }
+    }, []);
+
+    useEffect(() => {
         if (recordingState) {
             setTextToggle("Stop");
         } else {
             setTextToggle("Start");
         }
-    }, []);
+    }, [recordingState]);
+
+    useEffect(() => {
+        window.sessionStorage.setItem("routeRecording", JSON.stringify(recordingState));
+    }, [recordingState]);
+
     return (
         <>
             <Button onClick={toggleRecording}>{textToggle} recording route</Button>
-            <p>{recordingState.toString()}</p>
+            <p>Route is recording: {recordingState.toString()}</p>
         </>
     );
 };
