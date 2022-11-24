@@ -27,7 +27,7 @@ const Map = () => {
         const q = query(collection(db, "date_senzor"));
         onSnapshot(
             q,
-            async (querySnapshot) => {
+            (querySnapshot) => {
                 const changes = querySnapshot.docChanges();
                 changes.forEach((change) => {
                     if (change.type === "added") {
@@ -43,6 +43,7 @@ const Map = () => {
             }
         );
         console.log(dateSenzor);
+        console.log(latitude);
     }, []);
 
     const { isLoaded } = useLoadScript({
@@ -58,7 +59,10 @@ const Map = () => {
         <>
             <GoogleMap
                 zoom={15}
-                center={{ lat: parseFloat(latitude), lng: parseFloat(longitude) }}
+                center={{
+                    lat: latitude,
+                    lng: longitude,
+                }}
                 mapContainerClassName="map-container"
                 options={options}
             >

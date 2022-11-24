@@ -6,6 +6,7 @@ import { AuthContextProvider } from "./context/AuthContextProvider";
 import Protected from "./components/Protected";
 import Dashboard from "./pages/dashboard/Dashboard";
 import LoggedInRouter from "./components/LoggedInRouter";
+import History from "./pages/history/History";
 
 function App() {
     return (
@@ -29,6 +30,14 @@ function App() {
                         element={
                             <Protected>
                                 <Account />
+                            </Protected>
+                        }
+                    />
+                    <Route
+                        path="/history"
+                        element={
+                            <Protected>
+                                <History />
                             </Protected>
                         }
                     />
