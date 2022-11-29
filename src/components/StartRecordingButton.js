@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
-import { UserAuth } from "../../context/AuthContextProvider";
+import { UserAuth } from "../context/AuthContextProvider";
 import { useSelector } from "react-redux";
-import { startRecording, stopRecording } from "../../actions";
+import { startRecording, stopRecording } from "../actions";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 

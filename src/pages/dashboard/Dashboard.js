@@ -1,14 +1,16 @@
 import Map from "../../components/Map/Map";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Dashboard.css";
-import StartRecordingButton from "../../components/Map/StartRecordingButton";
+import StartRecordingNotification from "../../components/notifications/StartRecordingNotification";
+import StartRecordingButton from "../../components/StartRecordingButton";
 
 const Dashboard = () => {
     return (
-        <div>
+        <div className="dashboard">
             <Navbar />
             <Map />
             <StartRecordingButton />
+            <StartRecordingNotification />
         </div>
     );
 };
