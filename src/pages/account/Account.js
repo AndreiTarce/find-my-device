@@ -10,7 +10,7 @@ const Account = () => {
         <div>
             <Navbar />
             <div>
-                <p>Welcome, {user?.displayName}</p>
+                <h1>Welcome, {user?.displayName}</h1>
             </div>
             <LoginButton />
         </div>
