@@ -16,3 +16,10 @@ export const addSensorData = (data) => {
         payload: data,
     };
 };
+
+export const addTripToHistory = (data) => {
+    return {
+        type: "ADD_TRIP",
+        payload: data,
+    };
+};
