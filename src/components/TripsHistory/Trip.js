@@ -6,9 +6,9 @@ import { useDispatch } from "react-redux";
 const Trip = ({ trip }) => {
     const dispatch = useDispatch();
     const buttonClickHandler = () => {
-        console.log(trip);
         dispatch(addCurrentTripHistoryInfo(trip));
         dispatch(setMapActive());
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     };
     return (
         <Row xs={1} md={1} className="g-4 p-0">
