@@ -5,6 +5,7 @@ import { db } from "../../utils/firebase";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import { Timestamp } from "firebase/firestore";
+import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
 
 const TripsHistoryMap = () => {
     const { isLoaded } = useLoadScript({
@@ -46,8 +47,8 @@ const TripsHistoryMap = () => {
     }, [loading]);
 
     //rendering below
-    if (!isLoaded) return <div>Loading...</div>;
-    if (loading) return <div>Loading...</div>;
+    if (!isLoaded) return <LoaderSpinner />;
+    if (loading) return <LoaderSpinner />;
 
     return (
         <div id="trip-history-map-wrapper">

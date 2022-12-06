@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTripToHistory, sortTripsHistory } from "../../actions";
 import Trip from "../../components/TripsHistory/Trip";
 import TripsHistoryMap from "../../components/TripsHistory/TripsHistoryMap";
+import LoaderSpinner from "../../components/LoaderSpinner/LoaderSpinner";
 
 const History = () => {
     const { user } = UserAuth();
@@ -39,14 +40,14 @@ const History = () => {
     }, [loading]);
 
     if (loading) {
-        return <h1>loading firebase data...</h1>;
+        return <LoaderSpinner />;
     }
 
     return (
         <>
             <Navbar />
             <h1>Your trip history here</h1>
-            {mapActive ? <TripsHistoryMap /> : <p>inactive</p>}
+            {mapActive && <TripsHistoryMap />}
             {trips.length > 0 ? (
                 trips.map((trip, index) => <Trip trip={trip} key={index} />)
             ) : (
