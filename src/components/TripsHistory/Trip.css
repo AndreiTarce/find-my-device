@@ -1,0 +1,17 @@
+.card {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#trip-history-map-wrapper {
+    display: flex;
+    justify-content: center;
+    height: 70vh;
+}
+#trip-history-map-container {
+    width: 95%;
+    height: 90%;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 20px;
+}

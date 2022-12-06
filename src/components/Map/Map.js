@@ -1,7 +1,7 @@
 import { db } from "../../utils/firebase";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { useState } from "react";
-import { GoogleMap, useLoadScript, DirectionsRenderer } from "@react-google-maps/api";
+import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import { useMemo, useEffect } from "react";
 import "./Map.css";
 import RenderMapMarker from "./RenderMapMarker";
@@ -56,7 +56,7 @@ const Map = () => {
     if (!isLoaded) return <div>Loading...</div>;
 
     return (
-        <>
+        <div id="dashboard-map">
             <GoogleMap
                 zoom={15}
                 center={{
@@ -68,7 +68,7 @@ const Map = () => {
             >
                 <RenderMapMarker dateSenzor={dateSenzor} />
             </GoogleMap>
-        </>
+        </div>
     );
 };
 

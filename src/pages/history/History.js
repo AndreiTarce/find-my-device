@@ -4,13 +4,16 @@ import { collection, query, onSnapshot } from "firebase/firestore";
 import { db } from "../../utils/firebase";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTripToHistory } from "../../actions";
+import { addTripToHistory, sortTripsHistory } from "../../actions";
+import Trip from "../../components/TripsHistory/Trip";
+import TripsHistoryMap from "../../components/TripsHistory/TripsHistoryMap";
 
 const History = () => {
     const { user } = UserAuth();
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
     const trips = useSelector((state) => state.tripsHistory);
+    const mapActive = useSelector((state) => state.mapActive);
 
     useEffect(() => {
         const tripsRef = collection(db, `users/${user.uid}/trips`);
@@ -22,6 +25,7 @@ const History = () => {
                 changes.forEach((change) => {
                     if (change.type === "added") {
                         dispatch(addTripToHistory(change.doc.data()));
+                        dispatch(sortTripsHistory());
                     } else if (change.type === "removed") {
                         console.log("removed");
                     }
@@ -42,14 +46,9 @@ const History = () => {
         <>
             <Navbar />
             <h1>Your trip history here</h1>
+            {mapActive ? <TripsHistoryMap /> : <p>inactive</p>}
             {trips.length > 0 ? (
-                trips.map((trip, index) => (
-                    <div key={index}>
-                        <h2>Trip {index}</h2>
-                        <p>{trip.startTime.toString()}</p>
-                        <p>{trip.endTime.toString()}</p>
-                    </div>
-                ))
+                trips.map((trip, index) => <Trip trip={trip} key={index} />)
             ) : (
                 <h1>no answers yet :(</h1>
             )}

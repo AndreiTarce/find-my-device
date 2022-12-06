@@ -1,4 +1,4 @@
-import { Marker, GoogleMap } from "@react-google-maps/api";
+import { Marker } from "@react-google-maps/api";
 import currentLocation from "../../assets/location.svg";
 import pastLocation from "../../assets/new-moon.png";
 import "./MapMarker.css";
