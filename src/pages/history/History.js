@@ -39,6 +39,16 @@ const History = () => {
         );
     }, [loading]);
 
+    useEffect(() => {
+        var docWidth = document.documentElement.offsetWidth;
+        [].forEach.call(document.querySelectorAll("*"), function (el) {
+            if (el.offsetWidth > docWidth) {
+                console.log(el);
+                console.log(1);
+            }
+        });
+    }, []);
+
     if (loading) {
         return <LoaderSpinner />;
     }
