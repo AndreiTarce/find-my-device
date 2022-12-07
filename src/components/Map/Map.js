@@ -8,6 +8,7 @@ import RenderMapMarker from "./RenderMapMarker";
 import { UserAuth } from "../../context/AuthContextProvider";
 import { addSensorData } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
+import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
 
 const Map = () => {
     const { user } = UserAuth();
@@ -53,7 +54,7 @@ const Map = () => {
     const options = useMemo(() => ({ mapId: "a1c984e18919c1dc" }));
 
     //rendering below
-    if (!isLoaded) return <div>Loading...</div>;
+    if (!isLoaded) return <LoaderSpinner />;
 
     return (
         <div id="dashboard-map">
