@@ -2,6 +2,7 @@ import "./Trip.css";
 import { Card, Row, Col, Button } from "react-bootstrap";
 import { addCurrentTripHistoryInfo, setMapActive } from "../../actions";
 import { useDispatch } from "react-redux";
+import TripCard from "./TripCard";
 
 const Trip = ({ trip }) => {
     const dispatch = useDispatch();
@@ -11,9 +12,10 @@ const Trip = ({ trip }) => {
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     };
     return (
-        <Row xs={1} md={1} className="g-4 p-0">
-            <Col className="p-0">
-                <Card bg="light">
+        <Row xs={1} md={1} className="g-4">
+            <Col>
+                <TripCard />
+                {/* <Card bg="light">
                     <Card.Body>
                         <Card.Title>Trip name</Card.Title>
                         <Card.Text>
@@ -30,7 +32,7 @@ const Trip = ({ trip }) => {
                         </p>
                         <Button onClick={buttonClickHandler}>Load trip</Button>
                     </Card.Body>
-                </Card>
+                </Card> */}
             </Col>
         </Row>
     );
