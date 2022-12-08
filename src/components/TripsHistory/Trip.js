@@ -2,7 +2,6 @@ import "./Trip.css";
 import { Card, Row, Col, Button, Container } from "react-bootstrap";
 import { addCurrentTripHistoryInfo, setMapActive } from "../../actions";
 import { useDispatch } from "react-redux";
-import TripCard from "./TripCard";
 
 const Trip = ({ trip }) => {
     const dispatch = useDispatch();
@@ -15,25 +14,78 @@ const Trip = ({ trip }) => {
         <Container fluid>
             <Row xs={1} md={1} className="g-4">
                 <Col>
-                    <TripCard />
-                    {/* <Card bg="light">
-                    <Card.Body>
-                    <Card.Title>Trip name</Card.Title>
-                    <Card.Text>
-                    This is a longer card with supporting text below as a natural lead-in to additional content.
-                    This content is a little bit longer.
-                    </Card.Text>
-                    <p>
-                    <strong>Start time:</strong>
-                            {trip.startTime.toString()}
-                            </p>
-                            <p>
-                            <strong>End time:</strong>
-                            {trip.endTime.toString()}
-                            </p>
-                            <Button onClick={buttonClickHandler}>Load trip</Button>
-                            </Card.Body>
-                        </Card> */}
+                    <div className="trip-history-card">
+                        <div className="trip-history-card-grid">
+                            <div className="trip-history-card-header">
+                                <h2>Trip name</h2>
+                            </div>
+                            <div className="trip-history-card-footer flex">
+                                <Container fluid className="bottom">
+                                    <Row>
+                                        <Col>
+                                            <div className="trip-history-text-section">
+                                                <div className="text-grid">
+                                                    <div className="text-section-left-side">
+                                                        <span className="trip-history-date-header">Start time</span>
+                                                        <p>
+                                                            <span className="trip-history-date">
+                                                                {trip.startTime.getDay()}{" "}
+                                                                {trip.startTime.toLocaleString("en-US", {
+                                                                    month: "short",
+                                                                })}{" "}
+                                                                {trip.startTime.getFullYear()}
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                    <div className="text-section-rgiht-side">
+                                                        <span className="trip-history-time">
+                                                            {trip.startTime.getHours()}:
+                                                            {(trip.startTime.getMinutes() < 10 ? "0" : "") +
+                                                                trip.startTime.getMinutes()}
+                                                            :
+                                                            {(trip.startTime.getSeconds() < 10 ? "0" : "") +
+                                                                trip.startTime.getSeconds()}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Col>
+                                        <Col>
+                                            <div className="trip-history-text-section">
+                                                <div className="text-grid">
+                                                    <div className="text-section-left-side">
+                                                        <span className="trip-history-date-header">End time</span>
+                                                        <p>
+                                                            <span className="trip-history-date">
+                                                                {trip.endTime.getDay()}{" "}
+                                                                {trip.endTime.toLocaleString("en-US", {
+                                                                    month: "short",
+                                                                })}{" "}
+                                                                {trip.endTime.getFullYear()}
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                    <div className="text-section-rgiht-side">
+                                                        <span className="trip-history-time">
+                                                            {trip.endTime.getHours()}:
+                                                            {(trip.endTime.getMinutes() < 10 ? "0" : "") +
+                                                                trip.endTime.getMinutes()}
+                                                            :
+                                                            {(trip.endTime.getSeconds() < 10 ? "0" : "") +
+                                                                trip.endTime.getSeconds()}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Col>
+                                        <Col>
+                                            <Button onClick={buttonClickHandler}>Load trip</Button>
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </div>
+                        </div>
+                    </div>
                 </Col>
             </Row>
         </Container>
