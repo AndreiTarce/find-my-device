@@ -116,3 +116,27 @@
 
     color: #ffffff;
 }
+
+@media screen and (max-width: 600px) {
+    .text-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        line-height: 14px;
+        margin-bottom: 1.3rem;
+    }
+    .trip-history-date-header {
+        font-size: 3.5vw;
+    }
+
+    .trip-history-date {
+        font-size: 3vw;
+    }
+
+    .trip-history-time {
+        font-size: 4vw;
+    }
+    .text-section-left-side {
+        height: auto;
+    }
+}

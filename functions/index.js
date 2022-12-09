@@ -17,6 +17,7 @@ app.post("/", async (req, res) => {
         longitude: sensor_data.longitude,
     };
     await admin.firestore().collection("date_senzor").add(dataToSend);
+    await admin.firestore().collection("date_senzor").doc("current_location").set(dataToSend);
     res.status(201).send();
 });
 
