@@ -2,14 +2,40 @@ import "./Trip.css";
 import { Card, Row, Col, Button, Container } from "react-bootstrap";
 import { addCurrentTripHistoryInfo, setMapActive } from "../../actions";
 import { useDispatch } from "react-redux";
+import { db } from "../../utils/firebase";
+import { collection, onSnapshot, query, where, doc, deleteDoc, getDocs } from "firebase/firestore";
+import { UserAuth } from "../../context/AuthContextProvider";
+import { Timestamp } from "firebase/firestore";
+import DeleteTripModal from "./DeleteTripModal";
+import { useState } from "react";
 
 const Trip = ({ trip }) => {
     const dispatch = useDispatch();
-    const buttonClickHandler = () => {
+    const { user } = UserAuth();
+
+    const [deleteTripModalShow, setdeleteTripModalShow] = useState(false);
+
+    const loadTrip = () => {
         dispatch(addCurrentTripHistoryInfo(trip));
         dispatch(setMapActive());
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     };
+
+    const deleteTrip = async () => {
+        const q = query(
+            collection(db, `users/${user.uid}/trips`),
+            where("startTime", "==", Timestamp.fromDate(trip.startTime))
+        );
+        const querySnapshot = await getDocs(q);
+        console.log(querySnapshot);
+        querySnapshot.forEach(async (doc) => {
+            console.log(doc.ref);
+            await deleteDoc(doc.ref);
+            dispatch({ type: "DELETE_TRIP", payload: { itemToDeleteStartTime: doc.data().startTime.toDate() } });
+        });
+        setdeleteTripModalShow(false);
+    };
+
     return (
         <Container fluid>
             <Row xs={1} md={1} className="g-4">
@@ -79,7 +105,20 @@ const Trip = ({ trip }) => {
                                             </div>
                                         </Col>
                                         <Col>
-                                            <Button onClick={buttonClickHandler}>Load trip</Button>
+                                            <Button onClick={loadTrip}>Load trip</Button>
+                                            <Button
+                                                variant="danger"
+                                                onClick={() => {
+                                                    setdeleteTripModalShow(true);
+                                                }}
+                                            >
+                                                Delete trip
+                                            </Button>
+                                            <DeleteTripModal
+                                                show={deleteTripModalShow}
+                                                onHide={() => setdeleteTripModalShow(false)}
+                                                onConfirm={deleteTrip}
+                                            />
                                         </Col>
                                     </Row>
                                 </Container>

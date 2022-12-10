@@ -8,6 +8,8 @@ import { addTripToHistory, sortTripsHistory } from "../../actions";
 import Trip from "../../components/TripsHistory/Trip";
 import TripsHistoryMap from "../../components/TripsHistory/TripsHistoryMap";
 import LoaderSpinner from "../../components/LoaderSpinner/LoaderSpinner";
+import { Container } from "react-bootstrap";
+import DeleteTripModal from "../../components/TripsHistory/DeleteTripModal";
 
 const History = () => {
     const { user } = UserAuth();
@@ -56,8 +58,11 @@ const History = () => {
     return (
         <>
             <Navbar />
-            <h1>Your trip history here</h1>
             {mapActive && <TripsHistoryMap />}
+            <DeleteTripModal />
+            <Container>
+                <h1>Your trip history here</h1>
+            </Container>
             {trips.length > 0 ? (
                 trips.map((trip, index) => <Trip trip={trip} key={index} />)
             ) : (
