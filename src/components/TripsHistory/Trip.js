@@ -29,9 +29,7 @@ const Trip = ({ trip }) => {
         const querySnapshot = await getDocs(q);
         console.log(querySnapshot);
         querySnapshot.forEach(async (doc) => {
-            console.log(doc.ref);
             await deleteDoc(doc.ref);
-            dispatch({ type: "DELETE_TRIP", payload: { itemToDeleteStartTime: doc.data().startTime.toDate() } });
         });
         setdeleteTripModalShow(false);
     };

@@ -41,3 +41,10 @@ export const setMapActive = () => {
 export const setMapInactive = () => {
     return { type: "SET_MAP_INACTIVE" };
 };
+
+export const deleteTripFromHistory = (data) => {
+    return {
+        type: "DELETE_TRIP",
+        payload: { itemToDeleteStartTime: data },
+    };
+};

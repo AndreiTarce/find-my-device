@@ -4,7 +4,7 @@ import { collection, query, onSnapshot } from "firebase/firestore";
 import { db } from "../../utils/firebase";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTripToHistory, sortTripsHistory } from "../../actions";
+import { addTripToHistory, sortTripsHistory, deleteTripFromHistory } from "../../actions";
 import Trip from "../../components/TripsHistory/Trip";
 import TripsHistoryMap from "../../components/TripsHistory/TripsHistoryMap";
 import LoaderSpinner from "../../components/LoaderSpinner/LoaderSpinner";
@@ -30,7 +30,7 @@ const History = () => {
                         dispatch(addTripToHistory(change.doc.data()));
                         dispatch(sortTripsHistory());
                     } else if (change.type === "removed") {
-                        console.log("removed");
+                        dispatch(deleteTripFromHistory(change.doc.data().startTime.toDate()));
                     }
                 });
                 setLoading(false);
@@ -40,16 +40,6 @@ const History = () => {
             }
         );
     }, [loading]);
-
-    useEffect(() => {
-        var docWidth = document.documentElement.offsetWidth;
-        [].forEach.call(document.querySelectorAll("*"), function (el) {
-            if (el.offsetWidth > docWidth) {
-                console.log(el);
-                console.log(1);
-            }
-        });
-    }, []);
 
     if (loading) {
         return <LoaderSpinner />;

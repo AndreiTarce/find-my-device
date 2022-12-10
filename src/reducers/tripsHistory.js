@@ -19,6 +19,7 @@ const tripsHistoryReducer = (state = [], action) => {
                 }
             });
             trips2.splice(indexToDelete, 1);
+            trips2.sort((a, b) => b.startTime - a.startTime);
             return trips2;
         default:
             return state;
