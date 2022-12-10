@@ -18,8 +18,6 @@ const Map = () => {
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
     const dispatch = useDispatch();
-    const date = Timestamp.now();
-    console.log(date);
 
     const addDateSenzor = (data) => {
         dispatch(addSensorData(data));
@@ -32,19 +30,7 @@ const Map = () => {
         const q = query(doc(db, "date_senzor/current_location"));
         onSnapshot(
             q,
-            // (querySnapshot) => {
-            //     const changes = querySnapshot.docChanges();
-            //     changes.forEach((change) => {
-            //         if (change.type === "added") {
-            //             addDateSenzor(change.doc.data());
-            //         } else if (change.type === "removed") {
-            //             console.log("removed");
-            //         }
-            //     });
-            //     dispatch({ type: "SORT_SENSOR_DATA" });
-            // },
             (querySnapshot) => {
-                console.log(querySnapshot.data());
                 addDateSenzor(querySnapshot.data());
                 dispatch({ type: "UPDATE_CURRENT_LOCATION", payload: querySnapshot.data() });
             },
@@ -52,7 +38,6 @@ const Map = () => {
                 console.log(error);
             }
         );
-        console.log(dateSenzor[dateSenzor.length - 1]);
     }, []);
 
     const { isLoaded } = useLoadScript({

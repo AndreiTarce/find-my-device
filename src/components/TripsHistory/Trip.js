@@ -8,6 +8,7 @@ import { UserAuth } from "../../context/AuthContextProvider";
 import { Timestamp } from "firebase/firestore";
 import DeleteTripModal from "./DeleteTripModal";
 import { useState } from "react";
+import deleteIcon from "../../assets/deleteIcon.svg";
 
 const Trip = ({ trip }) => {
     const dispatch = useDispatch();
@@ -27,7 +28,6 @@ const Trip = ({ trip }) => {
             where("startTime", "==", Timestamp.fromDate(trip.startTime))
         );
         const querySnapshot = await getDocs(q);
-        console.log(querySnapshot);
         querySnapshot.forEach(async (doc) => {
             await deleteDoc(doc.ref);
         });
@@ -103,15 +103,19 @@ const Trip = ({ trip }) => {
                                             </div>
                                         </Col>
                                         <Col>
-                                            <Button onClick={loadTrip}>Load trip</Button>
+                                            <Button onClick={loadTrip} size="sm">
+                                                Load trip
+                                            </Button>
                                             <Button
                                                 variant="danger"
+                                                size="sm"
                                                 onClick={() => {
                                                     setdeleteTripModalShow(true);
                                                 }}
                                             >
                                                 Delete trip
                                             </Button>
+                                            <img src={deleteIcon} height={30} />
                                             <DeleteTripModal
                                                 show={deleteTripModalShow}
                                                 onHide={() => setdeleteTripModalShow(false)}

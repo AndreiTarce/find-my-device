@@ -15,7 +15,7 @@ const TripsHistoryMap = () => {
 
     const [dateSenzor, setDateSenzor] = useState([]);
     const [loading, setLoading] = useState(true);
-    const currentTripHistoryInfo = useState(useSelector((state) => state.currentTripHistoryInfo));
+    const currentTripHistoryInfo = useSelector((state) => state.currentTripHistoryInfo);
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
 
