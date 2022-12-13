@@ -6,6 +6,7 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import { Timestamp } from "firebase/firestore";
 import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
+import { Container } from "react-bootstrap";
 
 const TripsHistoryMap = () => {
     const { isLoaded } = useLoadScript({
@@ -53,6 +54,7 @@ const TripsHistoryMap = () => {
     return (
         <div id="trip-history-map-wrapper">
             <div id="trip-history-map-container">
+                <h2>Selected trip map</h2>
                 <GoogleMap
                     zoom={10}
                     center={{

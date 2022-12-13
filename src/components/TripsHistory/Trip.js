@@ -1,20 +1,23 @@
 import "./Trip.css";
 import { Card, Row, Col, Button, Container } from "react-bootstrap";
 import { addCurrentTripHistoryInfo, setMapActive } from "../../actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { db } from "../../utils/firebase";
 import { collection, onSnapshot, query, where, doc, deleteDoc, getDocs } from "firebase/firestore";
 import { UserAuth } from "../../context/AuthContextProvider";
 import { Timestamp } from "firebase/firestore";
 import DeleteTripModal from "./DeleteTripModal";
-import { useState } from "react";
+import { useState, useMemo, useRef } from "react";
 import deleteIcon from "../../assets/deleteIcon.svg";
+import { debounce } from "lodash";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const Trip = ({ trip }) => {
     const dispatch = useDispatch();
     const { user } = UserAuth();
 
     const [deleteTripModalShow, setdeleteTripModalShow] = useState(false);
+    const tripValueName = useRef(trip.name);
 
     const loadTrip = () => {
         dispatch(addCurrentTripHistoryInfo(trip));
@@ -34,6 +37,17 @@ const Trip = ({ trip }) => {
         setdeleteTripModalShow(false);
     };
 
+    const changeHandler = (event) => {
+        tripValueName.current = event?.target?.value;
+        dispatch({
+            type: "CHANGE_TRIP_NAME",
+            payload: { startTime: trip.startTime, newTripName: tripValueName.current },
+        });
+        console.log("debounced");
+    };
+
+    const debouncedChangeHandler = useMemo(() => debounce(changeHandler, 500), [trip, tripValueName]);
+
     return (
         <Container fluid>
             <Row xs={1} md={1} className="g-4">
@@ -42,6 +56,24 @@ const Trip = ({ trip }) => {
                         <div className="trip-history-card-grid">
                             <div className="trip-history-card-header">
                                 <h2>Trip name</h2>
+                                <input
+                                    value={tripValueName.current}
+                                    // onChange={(e) => {
+                                    //     tripValueName.current = e.target.value;
+                                    //     console.log("test");
+                                    //     debounce(
+                                    //         dispatch({
+                                    //             type: "CHANGE_TRIP_NAME",
+                                    //             payload: {
+                                    //                 startTime: trip.startTime,
+                                    //                 newTripName: tripValueName.current,
+                                    //             },
+                                    //         }),
+                                    //         500
+                                    //     );
+                                    // }}
+                                    onChange={debouncedChangeHandler}
+                                />
                             </div>
                             <div className="trip-history-card-footer flex">
                                 <Container fluid className="bottom">
@@ -106,16 +138,12 @@ const Trip = ({ trip }) => {
                                             <Button onClick={loadTrip} size="sm">
                                                 Load trip
                                             </Button>
-                                            <Button
-                                                variant="danger"
-                                                size="sm"
-                                                onClick={() => {
-                                                    setdeleteTripModalShow(true);
-                                                }}
-                                            >
-                                                Delete trip
-                                            </Button>
-                                            <img src={deleteIcon} height={30} />
+                                            <img
+                                                src={deleteIcon}
+                                                height={30}
+                                                onClick={() => setdeleteTripModalShow(true)}
+                                                className="hover"
+                                            />
                                             <DeleteTripModal
                                                 show={deleteTripModalShow}
                                                 onHide={() => setdeleteTripModalShow(false)}

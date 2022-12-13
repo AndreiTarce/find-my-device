@@ -3,7 +3,11 @@ const tripsHistoryReducer = (state = [], action) => {
         case "ADD_TRIP":
             return [
                 ...state,
-                { startTime: action.payload.startTime.toDate(), endTime: action.payload.endTime.toDate() },
+                {
+                    startTime: action.payload.startTime.toDate(),
+                    endTime: action.payload.endTime.toDate(),
+                    name: action.payload.name,
+                },
             ];
         case "SORT_TRIPS":
             const trips = [...state];
@@ -21,6 +25,14 @@ const tripsHistoryReducer = (state = [], action) => {
             trips2.splice(indexToDelete, 1);
             trips2.sort((a, b) => b.startTime - a.startTime);
             return trips2;
+        case "CHANGE_TRIP_NAME":
+            const trips3 = [...state];
+            trips3.forEach((trip) => {
+                if (trip.startTime.toString() == action.payload.startTime.toString()) {
+                    trip.name = action.payload.newTripName;
+                }
+            });
+            return trips3;
         default:
             return state;
     }

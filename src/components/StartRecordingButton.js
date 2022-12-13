@@ -21,6 +21,7 @@ const StartRecordingButton = () => {
             name: user.displayName,
         });
         await addDoc(collection(db, `users/${user.uid}/trips`), {
+            name: "trip",
             startTime: tripStartTime,
             endTime: Timestamp.now(),
         });
@@ -31,10 +32,12 @@ const StartRecordingButton = () => {
             dispatch(stopRecording());
             setTextToggle("Start");
             addTripTime();
+            dispatch({ type: "SHOW_STOP_RECORDING_NOTIFICATION" });
         } else {
             dispatch(startRecording());
             setTextToggle("Stop");
             setTripStartTime(Timestamp.now());
+            dispatch({ type: "SHOW_START_RECORDING_NOTIFICATION" });
         }
     };
 

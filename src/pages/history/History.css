@@ -1,0 +1,14 @@
+.divider {
+    height: 1px;
+    background-color: #252525;
+    margin-bottom: 2rem;
+}
+
+.trip-history-header {
+    margin-top: 2rem;
+}
+
+.trip-exit-active {
+    opacity: 0;
+    transition: opacity 700ms ease-out;
+}

@@ -8,22 +8,10 @@ const ProfileComponent = () => {
     const { user } = UserAuth();
     return (
         <>
-            <Image
-                roundedCircle
-                referrerPolicy="no-referrer"
-                src={user.photoURL}
-                width={40}
-                height={40}
-            />
+            <Image roundedCircle referrerPolicy="no-referrer" src={user.photoURL} width={40} height={40} />
             <NavDropdown title={user.displayName}>
-                <NavDropdown.Item href="/account">Account</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                    Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                    Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
+                {/* <NavDropdown.Item href="/account">Account</NavDropdown.Item> */}
+                {/* <NavDropdown.Divider /> */}
                 <div className="d-grid px-2">
                     <LoginButton />
                 </div>

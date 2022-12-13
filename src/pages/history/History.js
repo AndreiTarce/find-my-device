@@ -10,6 +10,8 @@ import TripsHistoryMap from "../../components/TripsHistory/TripsHistoryMap";
 import LoaderSpinner from "../../components/LoaderSpinner/LoaderSpinner";
 import { Container } from "react-bootstrap";
 import DeleteTripModal from "../../components/TripsHistory/DeleteTripModal";
+import "./History.css";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const History = () => {
     const { user } = UserAuth();
@@ -28,6 +30,7 @@ const History = () => {
                 changes.forEach((change) => {
                     if (change.type === "added") {
                         dispatch(addTripToHistory(change.doc.data()));
+                        console.log(change.doc.data());
                         dispatch(sortTripsHistory());
                     } else if (change.type === "removed") {
                         dispatch(deleteTripFromHistory(change.doc.data().startTime.toDate()));
@@ -50,13 +53,22 @@ const History = () => {
             <Navbar />
             {mapActive && <TripsHistoryMap />}
             <DeleteTripModal />
-            <Container>
-                <h1>Your trip history here</h1>
+            <Container className="trip-history-header">
+                <h1>Trip history</h1>
+                <div className="divider"></div>
             </Container>
-            {trips.length > 0 ? (
-                trips.map((trip, index) => <Trip trip={trip} key={index} />)
-            ) : (
-                <h1>no answers yet :(</h1>
+            <TransitionGroup component="div">
+                {trips.length > 0 &&
+                    trips.map((trip, index) => (
+                        <CSSTransition key={trip.startTime} timeout={700} classNames="trip">
+                            <Trip trip={trip} key={trip.startTime} />
+                        </CSSTransition>
+                    ))}
+            </TransitionGroup>
+            {trips.length <= 0 && (
+                <Container>
+                    <h2>You haven't recorded any trips yet.</h2>
+                </Container>
             )}
         </>
     );
