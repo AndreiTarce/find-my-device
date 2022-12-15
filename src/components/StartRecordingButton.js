@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { UserAuth } from "../context/AuthContextProvider";
 import { useSelector } from "react-redux";
 import { startRecording, stopRecording } from "../actions";
@@ -62,6 +62,9 @@ const StartRecordingButton = () => {
     return (
         <>
             <Button onClick={toggleRecording} className="margin-left">
+                {recordingState && (
+                    <Spinner as="span" variant="danger" animation="grow" size="sm" role="status" aria-hidden="true" />
+                )}{" "}
                 {textToggle} recording route
             </Button>
         </>

@@ -9,3 +9,9 @@
     height: 80vh;
     margin: 1rem;
 }
+
+@media screen and (max-width: 600px) {
+    #dashboard-map {
+        height: 77vh;
+    }
+}

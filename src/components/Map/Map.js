@@ -18,6 +18,7 @@ const Map = () => {
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
     const dispatch = useDispatch();
+    const center = useMemo(() => ({ lat: latitude, lng: longitude }));
 
     const addDateSenzor = (data) => {
         dispatch(addSensorData(data));
@@ -51,15 +52,7 @@ const Map = () => {
 
     return (
         <div id="dashboard-map">
-            <GoogleMap
-                zoom={15}
-                center={{
-                    lat: latitude,
-                    lng: longitude,
-                }}
-                mapContainerClassName="map-container"
-                options={options}
-            >
+            <GoogleMap zoom={15} center={center} mapContainerClassName="map-container" options={options}>
                 <RenderMapMarker dateSenzor={[currentLocation]} />
             </GoogleMap>
         </div>

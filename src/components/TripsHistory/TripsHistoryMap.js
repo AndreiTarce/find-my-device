@@ -19,6 +19,7 @@ const TripsHistoryMap = () => {
     const currentTripHistoryInfo = useSelector((state) => state.currentTripHistoryInfo);
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
+    const center = useMemo(() => ({ lat: latitude, lng: longitude }));
 
     useEffect(() => {
         const q = query(
@@ -52,22 +53,19 @@ const TripsHistoryMap = () => {
     if (loading) return <LoaderSpinner />;
 
     return (
-        <div id="trip-history-map-wrapper">
-            <div id="trip-history-map-container">
-                <h2>Selected trip map</h2>
-                <GoogleMap
-                    zoom={10}
-                    center={{
-                        lat: latitude,
-                        lng: longitude,
-                    }}
-                    mapContainerClassName="map-container"
-                    options={options}
-                >
-                    <RenderMapMarker dateSenzor={dateSenzor} />
-                </GoogleMap>
+        <>
+            <Container></Container>
+            <div id="trip-history-map-wrapper">
+                <div id="trip-history-map-container">
+                    <Container>
+                        <h2>Selected trip map</h2>
+                    </Container>
+                    <GoogleMap zoom={10} center={center} mapContainerClassName="map-container" options={options}>
+                        <RenderMapMarker dateSenzor={dateSenzor} />
+                    </GoogleMap>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

@@ -56,24 +56,7 @@ const Trip = ({ trip }) => {
                         <div className="trip-history-card-grid">
                             <div className="trip-history-card-header">
                                 <h2>Trip name</h2>
-                                <input
-                                    value={tripValueName.current}
-                                    // onChange={(e) => {
-                                    //     tripValueName.current = e.target.value;
-                                    //     console.log("test");
-                                    //     debounce(
-                                    //         dispatch({
-                                    //             type: "CHANGE_TRIP_NAME",
-                                    //             payload: {
-                                    //                 startTime: trip.startTime,
-                                    //                 newTripName: tripValueName.current,
-                                    //             },
-                                    //         }),
-                                    //         500
-                                    //     );
-                                    // }}
-                                    onChange={debouncedChangeHandler}
-                                />
+                                <input value={tripValueName.current} onChange={debouncedChangeHandler} />
                             </div>
                             <div className="trip-history-card-footer flex">
                                 <Container fluid className="bottom">
