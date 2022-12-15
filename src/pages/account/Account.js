@@ -7,33 +7,34 @@ import { Image } from "react-bootstrap";
 
 const Account = () => {
     const { user } = UserAuth();
-    console.log(user.photoURL);
-    // const image = user.photoURL.replace("s96-c", "s400-c");
-    // console.log(image);
-
-    return (
-        <div>
-            <Navbar />
-            <Container>
-                <h1>Account page</h1>
-                <h2>Welcome {user.displayName}</h2>
-                <p>Email: {user.email}</p>
-                <Image
-                    roundedCircle
-                    referrerPolicy="no-referrer"
-                    src={user.photoURL.replace("s96-c", "s400-c")}
-                    // width={40}
-                    // height={40}
-                />
-            </Container>
-            <Container fluid>
-                <Row>
-                    <Col>1 of 1</Col>
-                </Row>
-            </Container>
-            <LoginButton />
-        </div>
-    );
+    let image;
+    if (user) {
+        image = user.photoURL;
+    }
+    if (image)
+        return (
+            <div>
+                <Navbar />
+                <Container>
+                    <h1>Account page</h1>
+                    <h2>Welcome {user.displayName}</h2>
+                    <p>Email: {user.email}</p>
+                    <Image
+                        roundedCircle
+                        referrerPolicy="no-referrer"
+                        src={image.replace("s96-c", "s400-c")}
+                        // width={40}
+                        // height={40}
+                    />
+                </Container>
+                <Container fluid>
+                    <Row>
+                        <Col>1 of 1</Col>
+                    </Row>
+                </Container>
+                <LoginButton />
+            </div>
+        );
 };
 
 export default Account;
