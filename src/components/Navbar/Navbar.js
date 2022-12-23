@@ -17,6 +17,7 @@ const Navbar = () => {
                 <BootstrapNavbar.Toggle aria-controls="responsive-navbar-nav" />
                 <BootstrapNavbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
+                        <Nav.Link href="/dashboard">Dashboard</Nav.Link>
                         <Nav.Link href="/account">Account</Nav.Link>
                         <Nav.Link href="/history">History</Nav.Link>
                     </Nav>

@@ -9,9 +9,7 @@ const Account = () => {
     return (
         <div>
             <Navbar />
-            <Container>
-                <ProfileCard />
-            </Container>
+            <ProfileCard />
         </div>
     );
 };
