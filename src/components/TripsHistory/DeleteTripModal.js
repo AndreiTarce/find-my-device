@@ -1,5 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { useSelector } from "react-redux";
 
 const DeleteTripModal = (props) => {
     return (
@@ -25,18 +26,3 @@ const DeleteTripModal = (props) => {
 };
 
 export default DeleteTripModal;
-// function App() {
-//     const [modalShow, setModalShow] = React.useState(false);
-
-//     return (
-//         <>
-//             <Button variant="primary" onClick={() => setModalShow(true)}>
-//                 Launch vertically centered modal
-//             </Button>
-
-//             <MyVerticallyCenteredModal show={modalShow} onHide={() => setModalShow(false)} />
-//         </>
-//     );
-// }
-
-// render(<App />);

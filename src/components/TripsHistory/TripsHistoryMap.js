@@ -16,7 +16,9 @@ const TripsHistoryMap = () => {
 
     const [dateSenzor, setDateSenzor] = useState([]);
     const [loading, setLoading] = useState(true);
-    const currentTripHistoryInfo = useSelector((state) => state.currentTripHistoryInfo);
+    const [currentTripHistoryInfo, setCurrentTripHistoryInfo] = useState(
+        useSelector((state) => state.currentTripHistoryInfo)
+    );
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
     const center = useMemo(() => ({ lat: latitude, lng: longitude }));
@@ -31,6 +33,7 @@ const TripsHistoryMap = () => {
         onSnapshot(
             q,
             (querySnapshot) => {
+                setDateSenzor([]);
                 const docs = querySnapshot.docs;
                 docs.forEach((doc) => {
                     setDateSenzor((oldDateSenzor) => [
@@ -40,13 +43,14 @@ const TripsHistoryMap = () => {
                     setLatitude(doc.data().latitude);
                     setLongitude(doc.data().longitude);
                 });
+                console.log(dateSenzor);
                 setLoading(false);
             },
             (error) => {
                 console.log(error);
             }
         );
-    }, [loading]);
+    }, [loading, currentTripHistoryInfo]);
 
     //rendering below
     if (!isLoaded) return <LoaderSpinner />;
@@ -54,7 +58,6 @@ const TripsHistoryMap = () => {
 
     return (
         <>
-            <Container></Container>
             <div id="trip-history-map-wrapper">
                 <div id="trip-history-map-container">
                     <Container>

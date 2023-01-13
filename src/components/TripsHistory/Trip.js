@@ -20,10 +20,12 @@ const Trip = ({ trip }) => {
     const [tripValueName, setTripValueName] = useState(trip.name);
     const debouncedValue = useDebounce(tripValueName, 1000);
     const [firstLoad, setFirstLoad] = useState(true);
+    const currentTripHistoryInfo = useSelector((state) => state.currentTripHistoryInfo);
 
-    const loadTrip = () => {
-        dispatch(addCurrentTripHistoryInfo(trip));
-        dispatch(setMapActive());
+    const loadTrip = async () => {
+        await dispatch({ type: "SET_MAP_INACTIVE" });
+        await dispatch(addCurrentTripHistoryInfo(trip));
+        await dispatch(setMapActive());
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     };
 
@@ -37,6 +39,9 @@ const Trip = ({ trip }) => {
             await deleteDoc(doc.ref);
         });
         setdeleteTripModalShow(false);
+        if (currentTripHistoryInfo.startTime === trip.startTime) {
+            await dispatch({ type: "SET_MAP_INACTIVE" });
+        }
     };
 
     const changeHandler = (event) => {
