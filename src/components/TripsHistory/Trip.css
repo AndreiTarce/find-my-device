@@ -149,3 +149,14 @@
     opacity: 0;
     transition: opacity 700ms ease-out;
 }
+
+.trip-history-name {
+    border: none;
+    background-color: transparent;
+    font-weight: 600;
+    overflow: scroll;
+}
+
+.trip-history-name:focus {
+    border: none;
+}

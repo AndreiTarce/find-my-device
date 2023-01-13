@@ -9,7 +9,10 @@ admin.initializeApp();
 const firestore = admin.firestore();
 app.use(cors());
 
-app.get("/", (req, res) => {});
+app.get("/", (req, res) => {
+    res.setHeader("Content-Type", "application/json");
+    res.status(201).send({ response: 1 });
+});
 app.post("/", async (req, res) => {
     const sensor_data = req.body;
     const dataToSend = {

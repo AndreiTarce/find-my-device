@@ -1,5 +1,5 @@
 import "./Trip.css";
-import { Card, Row, Col, Button, Container } from "react-bootstrap";
+import { Card, Row, Col, Button, Container, Form } from "react-bootstrap";
 import { addCurrentTripHistoryInfo, setMapActive } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { db } from "../../utils/firebase";
@@ -7,17 +7,19 @@ import { collection, onSnapshot, query, where, doc, deleteDoc, getDocs } from "f
 import { UserAuth } from "../../context/AuthContextProvider";
 import { Timestamp } from "firebase/firestore";
 import DeleteTripModal from "./DeleteTripModal";
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import deleteIcon from "../../assets/deleteIcon.svg";
-import { debounce } from "lodash";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import useDebounce from "../useDebounce";
+import updateTripName from "./updateTripInfo";
 
 const Trip = ({ trip }) => {
     const dispatch = useDispatch();
     const { user } = UserAuth();
 
     const [deleteTripModalShow, setdeleteTripModalShow] = useState(false);
-    const tripValueName = useRef(trip.name);
+    const [tripValueName, setTripValueName] = useState(trip.name);
+    const debouncedValue = useDebounce(tripValueName, 1000);
+    const [firstLoad, setFirstLoad] = useState(true);
 
     const loadTrip = () => {
         dispatch(addCurrentTripHistoryInfo(trip));
@@ -38,15 +40,20 @@ const Trip = ({ trip }) => {
     };
 
     const changeHandler = (event) => {
-        tripValueName.current = event?.target?.value;
-        dispatch({
-            type: "CHANGE_TRIP_NAME",
-            payload: { startTime: trip.startTime, newTripName: tripValueName.current },
-        });
-        console.log("debounced");
+        setTripValueName(event.target.value);
+        setFirstLoad(false);
     };
 
-    const debouncedChangeHandler = useMemo(() => debounce(changeHandler, 500), [trip, tripValueName]);
+    useEffect(() => {
+        if (!firstLoad) {
+            const newTripObject = {
+                ...trip,
+                newTripName: tripValueName,
+            };
+            dispatch({ type: "CHANGE_TRIP_NAME", payload: newTripObject });
+            updateTripName(newTripObject, user.uid);
+        }
+    }, [debouncedValue]);
 
     return (
         <Container fluid>
@@ -55,8 +62,18 @@ const Trip = ({ trip }) => {
                     <div className="trip-history-card">
                         <div className="trip-history-card-grid">
                             <div className="trip-history-card-header">
-                                <h2>Trip name</h2>
-                                <input value={tripValueName.current} onChange={debouncedChangeHandler} />
+                                {/* <h2>Trip name</h2> */}
+                                <h2>
+                                    <Form.Control
+                                        type="text"
+                                        size="lg"
+                                        placeholder={tripValueName}
+                                        onChange={changeHandler}
+                                        value={tripValueName}
+                                        className="trip-history-name"
+                                        plaintext
+                                    />
+                                </h2>
                             </div>
                             <div className="trip-history-card-footer flex">
                                 <Container fluid className="bottom">

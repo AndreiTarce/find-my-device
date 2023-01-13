@@ -21,7 +21,7 @@ const StartRecordingButton = () => {
             name: user.displayName,
         });
         await addDoc(collection(db, `users/${user.uid}/trips`), {
-            name: "trip",
+            name: "Trip",
             startTime: tripStartTime,
             endTime: Timestamp.now(),
         });
