@@ -11,7 +11,7 @@ const Dashboard = () => {
             <Navbar />
             <Map />
             <StartRecordingButton />
-            <Toaster position="bottom-center" />
+            <Toaster position="top-center" />
         </div>
     );
 };
