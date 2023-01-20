@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { addDoc, doc, serverTimestamp, setDoc, collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import { Timestamp } from "firebase/firestore";
+import { toast } from "react-hot-toast";
 
 const StartRecordingButton = () => {
     const { user } = UserAuth();
@@ -29,11 +30,13 @@ const StartRecordingButton = () => {
 
     const toggleRecording = () => {
         if (recordingState) {
+            toast.error("Stopped recording", { icon: "🔴", duration: 2000 });
             dispatch(stopRecording());
             setTextToggle("Start");
             addTripTime();
             dispatch({ type: "SHOW_STOP_RECORDING_NOTIFICATION" });
         } else {
+            toast.success("Started recording");
             dispatch(startRecording());
             setTextToggle("Stop");
             setTripStartTime(Timestamp.now());

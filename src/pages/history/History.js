@@ -11,8 +11,7 @@ import LoaderSpinner from "../../components/LoaderSpinner/LoaderSpinner";
 import { Container } from "react-bootstrap";
 import DeleteTripModal from "../../components/TripsHistory/DeleteTripModal";
 import "./History.css";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const History = () => {
     const { user } = UserAuth();
@@ -58,20 +57,7 @@ const History = () => {
                 <h1>Trip history</h1>
                 <div className="divider"></div>
             </Container>
-            <TransitionGroup component="div">
-                {trips.length > 0 &&
-                    trips.map((trip, index) => (
-                        <motion.div
-                            transition={{ duration: 0.6 }}
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                        >
-                            <CSSTransition key={trip.startTime} timeout={700} classNames="trip">
-                                <Trip trip={trip} key={trip.startTime} />
-                            </CSSTransition>
-                        </motion.div>
-                    ))}
-            </TransitionGroup>
+            {trips.length > 0 && trips.map((trip) => <Trip trip={trip} key={trip.startTime} />)}
             {trips.length <= 0 && (
                 <Container>
                     <h2>You haven't recorded any trips yet.</h2>
