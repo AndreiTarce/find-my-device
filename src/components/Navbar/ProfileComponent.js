@@ -9,19 +9,24 @@ const ProfileComponent = () => {
     const { user } = UserAuth();
     return (
         <>
-            <Image
-                roundedCircle
-                referrerPolicy="no-referrer"
-                src={user.photoURL}
-                width={40}
-                height={40}
-            />
-            <NavDropdown title={user.displayName} align="end">
-                <div className="d-grid px-2">
-                    <LoginButton />
-                </div>
-                <MapThemeToggler />
-            </NavDropdown>
+            <Nav.Item className="d-flex">
+                <a href="/account">
+                    <Image
+                        roundedCircle
+                        referrerPolicy="no-referrer"
+                        src={user.photoURL}
+                        width={40}
+                        height={40}
+                        className="me-2"
+                    />
+                </a>
+                <NavDropdown title={user.displayName} align="end">
+                    <div className="d-grid px-2">
+                        <LoginButton />
+                    </div>
+                    <MapThemeToggler />
+                </NavDropdown>
+            </Nav.Item>
         </>
     );
 };
