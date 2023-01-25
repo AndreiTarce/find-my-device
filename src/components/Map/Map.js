@@ -10,6 +10,7 @@ import { addSensorData } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
 import { Timestamp } from "firebase/firestore";
+import { DARK } from "../../reducers/mapThemeToggler";
 
 const Map = () => {
     const { user } = UserAuth();
@@ -19,6 +20,7 @@ const Map = () => {
     const [longitude, setLongitude] = useState(0);
     const dispatch = useDispatch();
     const center = useMemo(() => ({ lat: latitude, lng: longitude }));
+    const mapTheme = useSelector((state) => state.mapTheme);
 
     const addDateSenzor = (data) => {
         dispatch(addSensorData(data));
@@ -33,7 +35,10 @@ const Map = () => {
             q,
             (querySnapshot) => {
                 addDateSenzor(querySnapshot.data());
-                dispatch({ type: "UPDATE_CURRENT_LOCATION", payload: querySnapshot.data() });
+                dispatch({
+                    type: "UPDATE_CURRENT_LOCATION",
+                    payload: querySnapshot.data(),
+                });
             },
             (error) => {
                 console.log(error);
@@ -45,14 +50,21 @@ const Map = () => {
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     });
 
-    const options = useMemo(() => ({ mapId: "a1c984e18919c1dc" }));
+    const options = useMemo(() => ({
+        mapId: mapTheme,
+    }));
 
     //rendering below
     if (!isLoaded) return <LoaderSpinner />;
 
     return (
-        <div id="dashboard-map">
-            <GoogleMap zoom={15} center={center} mapContainerClassName="map-container" options={options}>
+        <div id="dashboard-map" key={mapTheme}>
+            <GoogleMap
+                zoom={15}
+                center={center}
+                mapContainerClassName="map-container"
+                options={options}
+            >
                 <RenderMapMarker dateSenzor={[currentLocation]} />
             </GoogleMap>
         </div>

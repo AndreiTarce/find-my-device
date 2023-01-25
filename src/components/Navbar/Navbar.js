@@ -9,7 +9,13 @@ import logoWhite from "../../assets/logo_white.png";
 
 const Navbar = () => {
     return (
-        <BootstrapNavbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <BootstrapNavbar
+            sticky="top"
+            collapseOnSelect
+            expand="lg"
+            bg="dark"
+            variant="dark"
+        >
             <Container>
                 <BootstrapNavbar.Brand href="/">
                     <img src={logoWhite} height={30} />
