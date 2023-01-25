@@ -65,7 +65,10 @@ const Map = () => {
                 mapContainerClassName="map-container"
                 options={options}
             >
-                <RenderMapMarker dateSenzor={[currentLocation]} />
+                <RenderMapMarker
+                    dateSenzor={[currentLocation]}
+                    theme={mapTheme}
+                />
             </GoogleMap>
         </div>
     );
