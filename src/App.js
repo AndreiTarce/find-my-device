@@ -41,6 +41,7 @@ function App() {
                             </Protected>
                         }
                     />
+                    <Route path="*" element={<LoggedInRouter />} />
                 </Routes>
             </AuthContextProvider>
         </div>
