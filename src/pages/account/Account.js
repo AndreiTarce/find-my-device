@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import { UserAuth } from "../../context/AuthContextProvider";
 import { Image } from "react-bootstrap";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
+import DeleteDataModal from "./DeleteDataModal";
 
 const Account = () => {
     return (

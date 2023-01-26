@@ -7,6 +7,7 @@ import { collection, getCountFromServer } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
 import { onSnapshot } from "firebase/firestore";
+import DeleteDataModal from "../../pages/account/DeleteDataModal";
 
 const ProfileCard = () => {
     const { user } = UserAuth();
@@ -63,14 +64,7 @@ const ProfileCard = () => {
                             </Card.Subtitle>
                         </Card.Text>
                         <Card.Link>
-                            <Button
-                                variant="danger"
-                                onClick={() => {
-                                    deleteTrips(user.uid);
-                                }}
-                            >
-                                Delete my data
-                            </Button>
+                            <DeleteDataModal userId={user.uid} />
                         </Card.Link>
                         <Card.Link href="#">
                             <LoginButton />
