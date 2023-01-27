@@ -63,108 +63,80 @@ const Trip = ({ trip }) => {
 
     return (
         <motion.div transition={{ duration: 0.6 }} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
-            <Container fluid>
-                <Row xs={1} md={1} className="g-4">
-                    <Col>
-                        <div className="trip-history-card">
-                            <div className="trip-history-card-grid">
-                                <div className="trip-history-card-header">
-                                    {/* <h2>Trip name</h2> */}
-                                    <h2>
-                                        <Form.Control
-                                            type="text"
-                                            size="lg"
-                                            placeholder={tripValueName}
-                                            onChange={changeHandler}
-                                            value={tripValueName}
-                                            className="trip-history-name"
-                                            plaintext
-                                        />
-                                    </h2>
+            <div className="card trip-card">
+                <div className="card-body p-4">
+                    <h1>
+                        <Form.Control
+                            type="text"
+                            size="lg"
+                            placeholder={tripValueName}
+                            onChange={changeHandler}
+                            value={tripValueName}
+                            className="trip-history-name"
+                            plaintext
+                        />
+                    </h1>
+                    <p className="card-text">
+                        <div className="d-flex flex-column">
+                            <div className="start-time-section d-flex flex-row justify-content-between mb-3">
+                                <div className="start-time-date-section d-flex flex-column align-self-end">
+                                    <span className="trip-history-date-header">Start time</span>
+                                    <p>
+                                        <span className="trip-history-date">
+                                            {trip.startTime.getDay()}{" "}
+                                            {trip.startTime.toLocaleString("en-US", {
+                                                month: "short",
+                                            })}{" "}
+                                            {trip.startTime.getFullYear()}
+                                        </span>
+                                    </p>
                                 </div>
-                                <div className="trip-history-card-footer flex">
-                                    <Container fluid className="bottom">
-                                        <Row>
-                                            <Col>
-                                                <div className="trip-history-text-section">
-                                                    <div className="text-grid">
-                                                        <div className="text-section-left-side">
-                                                            <span className="trip-history-date-header">Start time</span>
-                                                            <p>
-                                                                <span className="trip-history-date">
-                                                                    {trip.startTime.getDay()}{" "}
-                                                                    {trip.startTime.toLocaleString("en-US", {
-                                                                        month: "short",
-                                                                    })}{" "}
-                                                                    {trip.startTime.getFullYear()}
-                                                                </span>
-                                                            </p>
-                                                        </div>
-                                                        <div className="text-section-rgiht-side">
-                                                            <span className="trip-history-time">
-                                                                {trip.startTime.getHours()}:
-                                                                {(trip.startTime.getMinutes() < 10 ? "0" : "") +
-                                                                    trip.startTime.getMinutes()}
-                                                                :
-                                                                {(trip.startTime.getSeconds() < 10 ? "0" : "") +
-                                                                    trip.startTime.getSeconds()}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </Col>
-                                            <Col>
-                                                <div className="trip-history-text-section">
-                                                    <div className="text-grid">
-                                                        <div className="text-section-left-side">
-                                                            <span className="trip-history-date-header">End time</span>
-                                                            <p>
-                                                                <span className="trip-history-date">
-                                                                    {trip.endTime.getDay()}{" "}
-                                                                    {trip.endTime.toLocaleString("en-US", {
-                                                                        month: "short",
-                                                                    })}{" "}
-                                                                    {trip.endTime.getFullYear()}
-                                                                </span>
-                                                            </p>
-                                                        </div>
-                                                        <div className="text-section-rgiht-side">
-                                                            <span className="trip-history-time">
-                                                                {trip.endTime.getHours()}:
-                                                                {(trip.endTime.getMinutes() < 10 ? "0" : "") +
-                                                                    trip.endTime.getMinutes()}
-                                                                :
-                                                                {(trip.endTime.getSeconds() < 10 ? "0" : "") +
-                                                                    trip.endTime.getSeconds()}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </Col>
-                                            <Col>
-                                                <Button onClick={loadTrip} size="sm">
-                                                    Load trip
-                                                </Button>
-                                                <img
-                                                    src={deleteIcon}
-                                                    height={30}
-                                                    onClick={() => setdeleteTripModalShow(true)}
-                                                    className="hover"
-                                                />
-                                                <DeleteTripModal
-                                                    show={deleteTripModalShow}
-                                                    onHide={() => setdeleteTripModalShow(false)}
-                                                    onConfirm={deleteTrip}
-                                                />
-                                            </Col>
-                                        </Row>
-                                    </Container>
+                                <div className="trip-history-time align-self-end">
+                                    {trip.startTime.getHours()}:
+                                    {(trip.startTime.getMinutes() < 10 ? "0" : "") + trip.startTime.getMinutes()}:
+                                    {(trip.startTime.getSeconds() < 10 ? "0" : "") + trip.startTime.getSeconds()}
                                 </div>
                             </div>
+                            <div className="end-time-section d-flex flex-row justify-content-between mb-5">
+                                <div className="end-time-date-section d-flex flex-column align-self-end">
+                                    <span className="trip-history-date-header">End time</span>
+                                    <p>
+                                        <span className="trip-history-date">
+                                            {trip.endTime.getDay()}{" "}
+                                            {trip.endTime.toLocaleString("en-US", {
+                                                month: "short",
+                                            })}{" "}
+                                            {trip.endTime.getFullYear()}
+                                        </span>
+                                    </p>
+                                </div>
+                                <span className="trip-history-time align-self-end">
+                                    {trip.endTime.getHours()}:
+                                    {(trip.endTime.getMinutes() < 10 ? "0" : "") + trip.endTime.getMinutes()}:
+                                    {(trip.endTime.getSeconds() < 10 ? "0" : "") + trip.endTime.getSeconds()}
+                                </span>
+                            </div>
                         </div>
-                    </Col>
-                </Row>
-            </Container>
+                        <div className="buttons-area d-flex justify-content-between align-items-center">
+                            <div>
+                                <Button onClick={loadTrip}>Load trip</Button>
+                            </div>
+
+                            <img
+                                src={deleteIcon}
+                                height={35}
+                                onClick={() => setdeleteTripModalShow(true)}
+                                className="hover"
+                            />
+                            <DeleteTripModal
+                                show={deleteTripModalShow}
+                                onHide={() => setdeleteTripModalShow(false)}
+                                onConfirm={deleteTrip}
+                            />
+                        </div>
+                    </p>
+                </div>
+            </div>
         </motion.div>
     );
 };

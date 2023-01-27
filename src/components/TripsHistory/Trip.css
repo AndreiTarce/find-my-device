@@ -11,78 +11,20 @@
     margin-top: 20px;
 }
 
-.trip-history-card {
-    /* background-color: #d9d9d9; */
-    /* background-color: #0093e9; */
-    /* background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%); */
-    background-color: #21d4fd;
-    background-image: linear-gradient(19deg, #21d4fd 0%, #b721ff 100%);
-
-    margin: 10px;
-    border-radius: 30px;
-    display: grid;
-    box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
 /* ----------TRIP HISTORY CARD MAIN GRID------------*/
-
-.trip-history-card-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 2fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "header"
-        "footer";
-    justify-items: start;
-    height: 12rem;
-}
-
-.trip-history-card-header {
-    grid-area: header;
-}
-
-.trip-history-card-footer {
-    grid-area: footer;
-    width: 100%;
-}
-
-.trip-history-card-header h2 {
-    font-weight: 800;
-    margin-left: 2rem;
-    margin-top: 1rem;
-}
-@media screen and (min-width: 601px) {
-    .trip-history-card-header h2 {
-        font-size: 3vw;
-    }
-}
-/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
-@media screen and (max-width: 600px) {
-    .trip-history-card-header h2 {
-        font-size: 10vw;
-    }
-}
-
-.flex {
-    display: flex;
-}
-
-.bottom {
-    align-self: flex-end;
-}
-
-.trip-history-text-section {
-    /* background-color: blue; */
-    margin-left: 1rem;
-}
 
 .trip-history-date {
     font-weight: 500;
     font-size: 1.5vw;
 
     color: #555555;
+}
+.start-time-date-section p {
+    margin: 0;
+}
+
+.end-time-date-section p {
+    margin: 0;
 }
 
 .trip-history-date-header {
@@ -91,29 +33,9 @@
     color: #252525;
 }
 
-.text-grid {
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-    grid-template-rows: auto;
-    grid-auto-columns: 1fr;
-    grid-auto-rows: 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas: "text-section-left-side text-section-right-side";
-}
-
-.text-section-left-side {
-    grid-area: text-section-left-side;
-}
-
-.text-section-right-side {
-    grid-area: text-section-right-side;
-}
-
 .trip-history-time {
     font-weight: 500;
-    font-size: 3.2vw;
-
+    font-size: 3vw;
     color: #ffffff;
 }
 
@@ -126,18 +48,15 @@
         margin-bottom: 1.3rem;
     }
     .trip-history-date-header {
-        font-size: 3.5vw;
+        font-size: 5vw;
     }
 
     .trip-history-date {
-        font-size: 3vw;
+        font-size: 4vw;
     }
 
     .trip-history-time {
-        font-size: 4vw;
-    }
-    .text-section-left-side {
-        height: auto;
+        font-size: 10vw;
     }
 }
 
@@ -159,4 +78,15 @@
 
 .trip-history-name:focus {
     border: none;
+}
+
+/*------------------------*/
+
+.trip-card {
+    max-width: 25rem;
+    background-color: #21d4fd;
+    background-image: linear-gradient(19deg, #21d4fd 0%, #b721ff 100%);
+    border: transparent !important;
+    border-radius: 30px !important;
+    box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.25);
 }
