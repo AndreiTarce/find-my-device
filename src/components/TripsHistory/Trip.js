@@ -62,7 +62,12 @@ const Trip = ({ trip }) => {
     }, [debouncedValue]);
 
     return (
-        <motion.div transition={{ duration: 0.6 }} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
+        <motion.div
+            transition={{ duration: 0.15 }}
+            whileHover={{ scale: 1.05 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+        >
             <div className="card trip-card">
                 <div className="card-body p-4">
                     <h1>
@@ -119,15 +124,19 @@ const Trip = ({ trip }) => {
                         </div>
                         <div className="buttons-area d-flex justify-content-between align-items-center">
                             <div>
-                                <Button onClick={loadTrip}>Load trip</Button>
+                                <Button onClick={loadTrip} size="lg">
+                                    Load trip
+                                </Button>
                             </div>
 
-                            <img
-                                src={deleteIcon}
-                                height={35}
-                                onClick={() => setdeleteTripModalShow(true)}
-                                className="hover"
-                            />
+                            <button className="noselect delete-button" onClick={() => setdeleteTripModalShow(true)}>
+                                <span class="text">Delete</span>
+                                <span class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                        <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path>
+                                    </svg>
+                                </span>
+                            </button>
                             <DeleteTripModal
                                 show={deleteTripModalShow}
                                 onHide={() => setdeleteTripModalShow(false)}
