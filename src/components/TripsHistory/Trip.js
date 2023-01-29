@@ -8,14 +8,14 @@ import { UserAuth } from "../../context/AuthContextProvider";
 import { Timestamp } from "firebase/firestore";
 import DeleteTripModal from "./DeleteTripModal";
 import { useState, useMemo, useRef, useEffect } from "react";
-import deleteIcon from "../../assets/deleteIcon.svg";
 import useDebounce from "../useDebounce";
 import updateTripName from "./updateTripInfo";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Trip = ({ trip }) => {
     const dispatch = useDispatch();
     const { user } = UserAuth();
+    console.log(trip.startTime);
 
     const [deleteTripModalShow, setdeleteTripModalShow] = useState(false);
     const [tripValueName, setTripValueName] = useState(trip.name);
@@ -68,7 +68,7 @@ const Trip = ({ trip }) => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
         >
-            <div className="card trip-card">
+            <div className="card trip-card bg">
                 <div className="card-body p-4">
                     <h1>
                         <Form.Control
@@ -88,7 +88,7 @@ const Trip = ({ trip }) => {
                                     <span className="trip-history-date-header">Start time</span>
                                     <p>
                                         <span className="trip-history-date">
-                                            {trip.startTime.getDay()}{" "}
+                                            {trip.startTime.getDate()}{" "}
                                             {trip.startTime.toLocaleString("en-US", {
                                                 month: "short",
                                             })}{" "}
@@ -107,7 +107,7 @@ const Trip = ({ trip }) => {
                                     <span className="trip-history-date-header">End time</span>
                                     <p>
                                         <span className="trip-history-date">
-                                            {trip.endTime.getDay()}{" "}
+                                            {trip.endTime.getDate()}{" "}
                                             {trip.endTime.toLocaleString("en-US", {
                                                 month: "short",
                                             })}{" "}
@@ -124,7 +124,7 @@ const Trip = ({ trip }) => {
                         </div>
                         <div className="buttons-area d-flex justify-content-between align-items-center">
                             <div>
-                                <Button onClick={loadTrip} size="lg">
+                                <Button className="rounded-btn" onClick={loadTrip}>
                                     Load trip
                                 </Button>
                             </div>

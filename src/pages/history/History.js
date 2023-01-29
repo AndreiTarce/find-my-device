@@ -50,7 +50,7 @@ const History = () => {
     }
 
     return (
-        <>
+        <div className="mb-4">
             <Navbar />
             {mapActive && <TripsHistoryMap />}
             <DeleteTripModal />
@@ -69,7 +69,7 @@ const History = () => {
                     </div>
                 </Container>
             )}
-        </>
+        </div>
     );
 };
 
