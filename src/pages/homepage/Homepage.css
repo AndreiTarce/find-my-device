@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-image: url("../../assets/homepage.png");
+    background-image: url("../../assets/homepage.webp");
     background-size: cover;
 }
 
@@ -13,13 +13,13 @@
     align-items: center;
 }
 
-.homepage h1{
-    color:white;
+.homepage h1 {
+    color: white;
     padding-bottom: 4vh;
-    font-size:8vw!important;
+    font-size: 8vw !important;
 }
 
-.homepage img{
+.homepage img {
     padding-bottom: 50px;
     max-height: 40vh;
     max-width: 50vw;

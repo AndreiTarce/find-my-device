@@ -1,13 +1,13 @@
 import { UserAuth } from "../../context/AuthContextProvider";
 import { Card, Button, Image, Container } from "react-bootstrap";
 import LoginButton from "../LoginButton";
-import { deleteTrips } from "../../api";
 import { db } from "../../utils/firebase";
-import { collection, getCountFromServer } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
 import { onSnapshot } from "firebase/firestore";
 import DeleteDataModal from "../../pages/account/DeleteDataModal";
+import "./ProfileCard.css";
 
 const ProfileCard = () => {
     const { user } = UserAuth();
@@ -40,8 +40,10 @@ const ProfileCard = () => {
     if (image)
         return (
             <Container>
-                <Card className="text-center" style={{ marginTop: "2rem" }}>
-                    <Card.Header as="h2">Your account</Card.Header>
+                <Card className="text-center account-card" style={{ marginTop: "2rem" }}>
+                    <Card.Header as="h2" className="">
+                        Your account
+                    </Card.Header>
                     <Card.Body>
                         <Card.Text>
                             <Image
@@ -53,13 +55,13 @@ const ProfileCard = () => {
                                 width={200}
                             />
                             <Card.Title as="h3">{user.displayName}</Card.Title>
-                            <Card.Subtitle className="m-2 text-muted">
+                            <Card.Subtitle className="m-2 text-white">
                                 Account created at: {user.metadata.creationTime}
                             </Card.Subtitle>
-                            <Card.Subtitle className="m-2 text-muted">
+                            <Card.Subtitle className="m-2 text-white">
                                 Last sign in: {user.metadata.lastSignInTime}
                             </Card.Subtitle>
-                            <Card.Subtitle className="m-2 text-muted">
+                            <Card.Subtitle className="m-2 text-white">
                                 <strong>Trips recorded: {count}</strong>
                             </Card.Subtitle>
                         </Card.Text>
