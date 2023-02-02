@@ -58,7 +58,7 @@ const History = () => {
                 <h1>Trip history</h1>
                 <div className="divider"></div>
             </Container>
-            <Container className="d-flex gap-4 flex-wrap ">
+            <Container className="d-flex gap-4 flex-wrap">
                 {trips.length > 0 && trips.map((trip) => <Trip trip={trip} key={trip.startTime} />)}
             </Container>
             {trips.length <= 0 && (

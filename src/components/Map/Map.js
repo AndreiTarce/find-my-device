@@ -1,5 +1,5 @@
 import { db } from "../../utils/firebase";
-import { collection, onSnapshot, query, where, doc } from "firebase/firestore";
+import { onSnapshot, query, doc } from "firebase/firestore";
 import { useState } from "react";
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import { useMemo, useEffect } from "react";
@@ -9,12 +9,8 @@ import { UserAuth } from "../../context/AuthContextProvider";
 import { addSensorData } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
-import { Timestamp } from "firebase/firestore";
-import { DARK } from "../../reducers/mapThemeToggler";
 
 const Map = () => {
-    const { user } = UserAuth();
-    const dateSenzor = useSelector((state) => state.sensorData);
     const currentLocation = useSelector((state) => state.currentLocation);
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
@@ -59,16 +55,8 @@ const Map = () => {
 
     return (
         <div id="dashboard-map" key={mapTheme}>
-            <GoogleMap
-                zoom={15}
-                center={center}
-                mapContainerClassName="map-container"
-                options={options}
-            >
-                <RenderMapMarker
-                    dateSenzor={[currentLocation]}
-                    theme={mapTheme}
-                />
+            <GoogleMap zoom={15} center={center} mapContainerClassName="map-container" options={options}>
+                <RenderMapMarker dateSenzor={[currentLocation]} theme={mapTheme} />
             </GoogleMap>
         </div>
     );

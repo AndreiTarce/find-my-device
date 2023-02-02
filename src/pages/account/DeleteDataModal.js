@@ -6,7 +6,6 @@ const DeleteDataModal = ({ userId }) => {
     const [show, setShow] = useState(false);
 
     const handleClose = async () => {
-        await deleteTrips(userId);
         setShow(false);
     };
     const handleShow = () => setShow(true);
@@ -28,7 +27,13 @@ const DeleteDataModal = ({ userId }) => {
                     </p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="danger" onClick={handleClose}>
+                    <Button
+                        variant="danger"
+                        onClick={async () => {
+                            handleClose();
+                            await deleteTrips(userId);
+                        }}
+                    >
                         Delete
                     </Button>
                     <Button variant="secondary" onClick={handleClose}>
