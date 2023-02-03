@@ -7,6 +7,7 @@ const tripsHistoryReducer = (state = [], action) => {
                     startTime: action.payload.startTime.toDate(),
                     endTime: action.payload.endTime.toDate(),
                     name: action.payload.name,
+                    distanceCovered: action.payload.distanceCovered,
                 },
             ];
         case "SORT_TRIPS":

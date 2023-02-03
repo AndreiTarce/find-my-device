@@ -15,7 +15,6 @@ import { motion } from "framer-motion";
 const Trip = ({ trip }) => {
     const dispatch = useDispatch();
     const { user } = UserAuth();
-    console.log(trip.startTime);
 
     const [deleteTripModalShow, setdeleteTripModalShow] = useState(false);
     const [tripValueName, setTripValueName] = useState(trip.name);
@@ -120,6 +119,9 @@ const Trip = ({ trip }) => {
                                     {(trip.endTime.getMinutes() < 10 ? "0" : "") + trip.endTime.getMinutes()}:
                                     {(trip.endTime.getSeconds() < 10 ? "0" : "") + trip.endTime.getSeconds()}
                                 </span>
+                            </div>
+                            <div className="d-flex flex-row justify-content-between mb-5">
+                                <p>Distance covered: {trip.distanceCovered.toFixed(2)}km</p>
                             </div>
                         </div>
                         <div className="buttons-area d-flex justify-content-between align-items-center">

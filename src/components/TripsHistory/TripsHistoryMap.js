@@ -9,10 +9,11 @@ import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
 import { Container } from "react-bootstrap";
 
 const TripsHistoryMap = () => {
+    const mapTheme = useSelector((state) => state.mapTheme);
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     });
-    const options = useMemo(() => ({ mapId: "a1c984e18919c1dc" }));
+    const options = useMemo(() => ({ mapId: mapTheme }));
 
     const [dateSenzor, setDateSenzor] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -58,13 +59,13 @@ const TripsHistoryMap = () => {
 
     return (
         <>
-            <div id="trip-history-map-wrapper">
+            <div id="trip-history-map-wrapper" key={mapTheme}>
                 <div id="trip-history-map-container">
                     <Container>
                         <h2>Selected trip map</h2>
                     </Container>
-                    <GoogleMap zoom={10} center={center} mapContainerClassName="map-container" options={options}>
-                        <RenderMapMarker dateSenzor={dateSenzor} />
+                    <GoogleMap zoom={13} center={center} mapContainerClassName="map-container" options={options}>
+                        <RenderMapMarker dateSenzor={dateSenzor} theme={mapTheme} />
                     </GoogleMap>
                 </div>
             </div>

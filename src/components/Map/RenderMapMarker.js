@@ -13,30 +13,22 @@ const RenderMapMarker = ({ dateSenzor, theme }) => {
                 index !== dateSenzor.length - 1 ? (
                     <div className="transparent">
                         <Marker
-                            key={index}
+                            key={data.latitude}
                             position={{
                                 lat: parseFloat(data.latitude),
                                 lng: parseFloat(data.longitude),
                             }}
-                            icon={
-                                theme === DARK
-                                    ? currentLocationWhite
-                                    : currentLocation
-                            }
+                            icon={pastLocation}
                         />
                     </div>
                 ) : (
                     <Marker
-                        key={index}
+                        key={data.latitude}
                         position={{
                             lat: parseFloat(data.latitude),
                             lng: parseFloat(data.longitude),
                         }}
-                        icon={
-                            theme === DARK
-                                ? currentLocationWhite
-                                : currentLocation
-                        }
+                        icon={theme === DARK ? currentLocationWhite : currentLocation}
                         animation={google.maps.Animation.BOUNCE}
                     />
                 )

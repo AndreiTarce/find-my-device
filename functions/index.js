@@ -50,9 +50,26 @@ exports.calculateRouteDistance = functions
         const userId = context.params.userId;
         const docId = context.params.docId;
 
-        await admin.firestore().doc(`users/${userId}/trips/${docId}`).update({ test: "test" });
         // const name = newValue.name;
-
+        const unfilteredLocationArray = [];
+        const query = await admin
+            .firestore()
+            .collection(`date_senzor`)
+            .where("time", ">=", startTime)
+            .get()
+            .then((result) => {
+                result.forEach((doc) => {
+                    unfilteredLocationArray.push(doc.data());
+                });
+            });
+        const filteredLocationArray = unfilteredLocationArray.filter((location) => location.time <= endTime);
+        filteredLocationArray.sort((a, b) => a.time - b.time);
+        let totalDistance = 0;
+        for (let i = 0; i < filteredLocationArray.length - 1; i++) {
+            const distanceBetweenPoints = haversine_distance(filteredLocationArray[i], filteredLocationArray[i + 1]);
+            totalDistance += distanceBetweenPoints;
+        }
+        await admin.firestore().doc(`users/${userId}/trips/${docId}`).update({ distanceCovered: totalDistance });
         // perform desired operations ...
     });
 
@@ -90,4 +107,23 @@ async function deleteQueryBatch(db, query, resolve) {
     process.nextTick(() => {
         deleteQueryBatch(db, query, resolve);
     });
+}
+
+function haversine_distance(mk1, mk2) {
+    const R = 6371.071; // Radius of the Earth in miles
+    const rlat1 = mk1.latitude * (Math.PI / 180); // Convert degrees to radians
+    const rlat2 = mk2.latitude * (Math.PI / 180); // Convert degrees to radians
+    const difflat = rlat2 - rlat1; // Radian difference (latitudes)
+    const difflon = (mk2.longitude - mk1.longitude) * (Math.PI / 180); // Radian difference (longitudes)
+
+    const d =
+        2 *
+        R *
+        Math.asin(
+            Math.sqrt(
+                Math.sin(difflat / 2) * Math.sin(difflat / 2) +
+                    Math.cos(rlat1) * Math.cos(rlat2) * Math.sin(difflon / 2) * Math.sin(difflon / 2)
+            )
+        );
+    return d;
 }
