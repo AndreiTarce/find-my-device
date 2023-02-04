@@ -52,7 +52,7 @@ const History = () => {
     return (
         <div className="mb-4">
             <Navbar />
-            {mapActive && <TripsHistoryMap />}
+            <Container>{mapActive && <TripsHistoryMap />}</Container>
             <DeleteTripModal />
             <Container className="trip-history-header">
                 <h1>Trip history</h1>

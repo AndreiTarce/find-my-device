@@ -5,10 +5,10 @@ import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import { useMemo, useEffect } from "react";
 import "./Map.css";
 import RenderMapMarker from "./RenderMapMarker";
-import { UserAuth } from "../../context/AuthContextProvider";
 import { addSensorData } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
+import { motion } from "framer-motion";
 
 const Map = () => {
     const currentLocation = useSelector((state) => state.currentLocation);
@@ -53,13 +53,24 @@ const Map = () => {
     //rendering below
     if (!isLoaded) return <LoaderSpinner />;
 
-    return (
-        <div id="dashboard-map" key={mapTheme}>
-            <GoogleMap zoom={15} center={center} mapContainerClassName="map-container" options={options}>
-                <RenderMapMarker dateSenzor={[currentLocation]} theme={mapTheme} />
-            </GoogleMap>
-        </div>
-    );
+    if (isLoaded)
+        return (
+            <motion.div
+                id="dashboard-map"
+                key={mapTheme}
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20,
+                }}
+            >
+                <GoogleMap zoom={15} center={center} mapContainerClassName="map-container" options={options}>
+                    <RenderMapMarker dateSenzor={[currentLocation]} theme={mapTheme} />
+                </GoogleMap>
+            </motion.div>
+        );
 };
 
 export default Map;

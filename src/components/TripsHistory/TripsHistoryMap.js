@@ -5,8 +5,8 @@ import { db } from "../../utils/firebase";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import { Timestamp } from "firebase/firestore";
-import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
 import { Container } from "react-bootstrap";
+import { motion } from "framer-motion";
 
 const TripsHistoryMap = () => {
     const mapTheme = useSelector((state) => state.mapTheme);
@@ -53,24 +53,29 @@ const TripsHistoryMap = () => {
         );
     }, [loading, currentTripHistoryInfo]);
 
-    //rendering below
-    if (!isLoaded) return <LoaderSpinner />;
-    if (loading) return <LoaderSpinner />;
-
-    return (
-        <>
-            <div id="trip-history-map-wrapper" key={mapTheme}>
-                <div id="trip-history-map-container">
-                    <Container>
-                        <h2>Selected trip map</h2>
-                    </Container>
-                    <GoogleMap zoom={13} center={center} mapContainerClassName="map-container" options={options}>
-                        <RenderMapMarker dateSenzor={dateSenzor} theme={mapTheme} />
-                    </GoogleMap>
+    if (isLoaded && !loading)
+        return (
+            <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20,
+                }}
+            >
+                <div className="mb-5" id="trip-history-map-wrapper" key={mapTheme}>
+                    <div id="trip-history-map-container">
+                        <Container>
+                            <h2>Selected trip map</h2>
+                        </Container>
+                        <GoogleMap zoom={13} center={center} mapContainerClassName="map-container" options={options}>
+                            <RenderMapMarker dateSenzor={dateSenzor} theme={mapTheme} />
+                        </GoogleMap>
+                    </div>
                 </div>
-            </div>
-        </>
-    );
+            </motion.div>
+        );
 };
 
 export default TripsHistoryMap;

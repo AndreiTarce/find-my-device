@@ -120,8 +120,13 @@ const Trip = ({ trip }) => {
                                     {(trip.endTime.getSeconds() < 10 ? "0" : "") + trip.endTime.getSeconds()}
                                 </span>
                             </div>
-                            <div className="d-flex flex-row justify-content-between mb-5">
-                                <p>Distance covered: {trip.distanceCovered.toFixed(2)}km</p>
+                            <div className="d-flex flex-row justify-content-between mb-2">
+                                <p>
+                                    <span className="trip-history-date-header">Distance covered</span>
+                                </p>
+                                <p>
+                                    <span className="trip-history-distance">{trip.distanceCovered.toFixed(2)}km</span>
+                                </p>
                             </div>
                         </div>
                         <div className="buttons-area d-flex justify-content-between align-items-center">
