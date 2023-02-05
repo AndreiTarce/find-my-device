@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://raw.githubusercontent.com/AndreiTarce/licenta-web-app/master/src/assets/logo.png?token=GHSAT0AAAAAAB5OHZOBJCEOMJSJLNXFYWHOY67Y3IA" alt="Markdownify" width="200"></a>
+  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://raw.githubusercontent.com/AndreiTarce/find-my-device/master/src/assets/logo.png?token=GHSAT0AAAAAAB5OHZOB5PVP4BXHZYLJMWVCY672BPA" alt="Markdownify" width="200"></a>
   <br>
   Find My Device
   <br>
