@@ -1,5 +1,8 @@
 {
-    "projects": {
-        "default": "find-my-device-be27c"
-    }
+  "projects": {
+    "default": "find-my-device-be27c",
+    "production": "find-my-device-be27c"
+  },
+  "targets": {},
+  "etags": {}
 }
