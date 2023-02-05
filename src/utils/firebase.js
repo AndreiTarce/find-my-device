@@ -10,12 +10,12 @@ const provider = new GoogleAuthProvider();
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDUduiswoj_-e7IbNMXRtt4XvSK9x9ufGk",
-    authDomain: "proiect-licenta-632d6.firebaseapp.com",
-    projectId: "proiect-licenta-632d6",
-    storageBucket: "proiect-licenta-632d6.appspot.com",
-    messagingSenderId: "856535409340",
-    appId: "1:856535409340:web:9615de48a8e1d8470ea6b9",
+    apiKey: "AIzaSyASbFajKMnooEkSx4a0v7EFpBec3iFG71g",
+    authDomain: "find-my-device-be27c.firebaseapp.com",
+    projectId: "find-my-device-be27c",
+    storageBucket: "find-my-device-be27c.appspot.com",
+    messagingSenderId: "167215727957",
+    appId: "1:167215727957:web:0171726f8e53b12c2edbdc",
 };
 
 // Initialize Firebase
