@@ -5,7 +5,6 @@ import tripsHistoryReducer from "./tripsHistory";
 import currentTripHistoryInfoReducer from "./currentTripHistoryInfo";
 import mapActiveReducer from "./mapActive";
 import currentLocationReducer from "./currentLocation";
-import recordingNotificationReducer from "./recordingNotification";
 import mapThemeTogglerReducer from "./mapThemeToggler";
 
 const rootReducer = combineReducers({
@@ -15,7 +14,6 @@ const rootReducer = combineReducers({
     currentTripHistoryInfo: currentTripHistoryInfoReducer,
     mapActive: mapActiveReducer,
     currentLocation: currentLocationReducer,
-    recordingNotification: recordingNotificationReducer,
     mapTheme: mapThemeTogglerReducer,
 });
 

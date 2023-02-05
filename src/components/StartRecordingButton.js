@@ -34,13 +34,11 @@ const StartRecordingButton = () => {
             dispatch(stopRecording());
             setTextToggle("Start");
             addTripTime();
-            dispatch({ type: "SHOW_STOP_RECORDING_NOTIFICATION" });
         } else {
             toast.success("Started recording");
             dispatch(startRecording());
             setTextToggle("Stop");
             setTripStartTime(Timestamp.now());
-            dispatch({ type: "SHOW_START_RECORDING_NOTIFICATION" });
         }
     };
 

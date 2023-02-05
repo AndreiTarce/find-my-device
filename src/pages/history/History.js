@@ -1,53 +1,39 @@
 import Navbar from "../../components/Navbar/Navbar";
 import { UserAuth } from "../../context/AuthContextProvider";
-import { collection, query, onSnapshot } from "firebase/firestore";
+import { collection, query, orderBy } from "firebase/firestore";
 import { db } from "../../utils/firebase";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addTripToHistory, sortTripsHistory, deleteTripFromHistory } from "../../actions";
+import { useSelector } from "react-redux";
 import Trip from "../../components/TripsHistory/Trip";
 import TripsHistoryMap from "../../components/TripsHistory/TripsHistoryMap";
 import LoaderSpinner from "../../components/LoaderSpinner/LoaderSpinner";
-import { Container, Image, Row } from "react-bootstrap";
+import { Container, Image } from "react-bootstrap";
 import DeleteTripModal from "../../components/TripsHistory/DeleteTripModal";
 import "./History.css";
-import { motion, AnimatePresence } from "framer-motion";
 import noTripsIllustration from "../../assets/no_trips.svg";
+import { useCollection } from "react-firebase-hooks/firestore";
+import Error from "../../components/Error/Error";
+
+//*Converted to react-firebase-hooks
 
 const History = () => {
     const { user } = UserAuth();
-    const dispatch = useDispatch();
-    const [loading, setLoading] = useState(true);
-    const trips = useSelector((state) => state.tripsHistory);
     const mapActive = useSelector((state) => state.mapActive);
+    const tripsRef = collection(db, `users/${user.uid}/trips`);
+    const tripsQuery = query(tripsRef, orderBy("startTime", "desc"));
 
-    useEffect(() => {
-        const tripsRef = collection(db, `users/${user.uid}/trips`);
-        const tripsQuery = query(tripsRef);
-        onSnapshot(
-            tripsQuery,
-            (querySnapshot) => {
-                const changes = querySnapshot.docChanges();
-                changes.forEach((change) => {
-                    if (change.type === "added") {
-                        dispatch(addTripToHistory(change.doc.data()));
-                        console.log(change.doc.data());
-                        dispatch(sortTripsHistory());
-                    } else if (change.type === "removed") {
-                        dispatch(deleteTripFromHistory(change.doc.data().startTime.toDate()));
-                    }
-                });
-                setLoading(false);
-            },
-            (error) => {
-                console.log(error);
-            }
+    const [snapshot, loading, error] = useCollection(tripsQuery, {
+        snapshotListenOptions: { includeMetadataChanges: true },
+    });
+
+    if (error)
+        return (
+            <>
+                <Navbar />
+                <Error />
+            </>
         );
-    }, [loading]);
 
-    if (loading) {
-        return <LoaderSpinner />;
-    }
+    if (loading) return <LoaderSpinner />;
 
     return (
         <div className="mb-4">
@@ -59,9 +45,9 @@ const History = () => {
                 <div className="divider"></div>
             </Container>
             <Container className="d-flex gap-4 flex-wrap">
-                {trips.length > 0 && trips.map((trip) => <Trip trip={trip} key={trip.startTime} />)}
+                {snapshot && snapshot.docs.map((trip) => <Trip trip={trip.data()} key={trip.id} />)}
             </Container>
-            {trips.length <= 0 && (
+            {!snapshot.docs.length && (
                 <Container className="d-flex flex-column">
                     <h2 className="pb-5">You haven't recorded any trips yet.</h2>
                     <div className="illustration-container">

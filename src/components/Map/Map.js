@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
 import { motion } from "framer-motion";
 
+// TODO: convert to react firebase hooks
+
 const Map = () => {
     const currentLocation = useSelector((state) => state.currentLocation);
     const [latitude, setLatitude] = useState(0);
@@ -25,6 +27,7 @@ const Map = () => {
     };
 
     //real-time sensor data fetching
+
     useEffect(() => {
         const q = query(doc(db, "date_senzor/current_location"));
         onSnapshot(
@@ -57,7 +60,6 @@ const Map = () => {
         return (
             <motion.div
                 id="dashboard-map"
-                key={mapTheme}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{
@@ -66,7 +68,13 @@ const Map = () => {
                     damping: 20,
                 }}
             >
-                <GoogleMap zoom={15} center={center} mapContainerClassName="map-container" options={options}>
+                <GoogleMap
+                    zoom={15}
+                    center={center}
+                    mapContainerClassName="map-container"
+                    options={options}
+                    key={mapTheme}
+                >
                     <RenderMapMarker dateSenzor={[currentLocation]} theme={mapTheme} />
                 </GoogleMap>
             </motion.div>

@@ -34,6 +34,15 @@ const tripsHistoryReducer = (state = [], action) => {
                 }
             });
             return trips3;
+        case "SET_TRIPS":
+            return [
+                {
+                    startTime: action.payload.startTime.toDate(),
+                    endTime: action.payload.endTime.toDate(),
+                    name: action.payload.name,
+                    distanceCovered: action.payload.distanceCovered,
+                },
+            ];
         default:
             return state;
     }

@@ -4,7 +4,6 @@ import RenderMapMarker from "../Map/RenderMapMarker";
 import { db } from "../../utils/firebase";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { useSelector } from "react-redux";
-import { Timestamp } from "firebase/firestore";
 import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
 
@@ -24,15 +23,15 @@ const TripsHistoryMap = () => {
     const [longitude, setLongitude] = useState(0);
     const center = useMemo(() => ({ lat: latitude, lng: longitude }));
 
-    useEffect(() => {
-        const q = query(
-            collection(db, "date_senzor"),
-            where("time", ">=", Timestamp.fromDate(currentTripHistoryInfo.startTime)),
-            where("time", "<=", Timestamp.fromDate(currentTripHistoryInfo.endTime))
-        );
+    const sensorDataQuery = query(
+        collection(db, "date_senzor"),
+        where("time", ">=", currentTripHistoryInfo.startTime),
+        where("time", "<=", currentTripHistoryInfo.endTime)
+    );
 
+    useEffect(() => {
         onSnapshot(
-            q,
+            sensorDataQuery,
             (querySnapshot) => {
                 setDateSenzor([]);
                 const docs = querySnapshot.docs;
@@ -44,7 +43,6 @@ const TripsHistoryMap = () => {
                     setLatitude(doc.data().latitude);
                     setLongitude(doc.data().longitude);
                 });
-                console.log(dateSenzor);
                 setLoading(false);
             },
             (error) => {

@@ -5,6 +5,8 @@ import currentLocationWhite from "../../assets/location_white.png";
 import "./MapMarker.css";
 import { DARK } from "../../reducers/mapThemeToggler";
 
+// TODO : fix react keys
+
 const RenderMapMarker = ({ dateSenzor, theme }) => {
     const google = window.google;
     return (
@@ -13,7 +15,7 @@ const RenderMapMarker = ({ dateSenzor, theme }) => {
                 index !== dateSenzor.length - 1 ? (
                     <div className="transparent">
                         <Marker
-                            key={data.latitude}
+                            key={data.time}
                             position={{
                                 lat: parseFloat(data.latitude),
                                 lng: parseFloat(data.longitude),
@@ -23,7 +25,7 @@ const RenderMapMarker = ({ dateSenzor, theme }) => {
                     </div>
                 ) : (
                     <Marker
-                        key={data.latitude}
+                        key={data.time}
                         position={{
                             lat: parseFloat(data.latitude),
                             lng: parseFloat(data.longitude),
