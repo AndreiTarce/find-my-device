@@ -10,7 +10,7 @@ import mapThemeTogglerReducer from "./mapThemeToggler";
 const rootReducer = combineReducers({
     routeRecording: routeRecordingReducer,
     sensorData: sensorDataStateReducer,
-    tripsHistory: tripsHistoryReducer,
+    // tripsHistory: tripsHistoryReducer,
     currentTripHistoryInfo: currentTripHistoryInfoReducer,
     mapActive: mapActiveReducer,
     currentLocation: currentLocationReducer,
