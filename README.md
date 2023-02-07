@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://find-my-device-be27c.web.app/dashboard"><img src="https://github.com/AndreiTarce/find-my-device/blob/15286ec5409c5bd5e250fbc666976f6d22dd69ce/src/assets/logo.png" alt="Find My Device Logo" width="200"></a>
+  <a href="https://find-my-device-be27c.web.app/dashboard"><img src="https://github.com/AndreiTarce/find-my-device/blob/2ea4f5ab581e50c04ee5962cab8001022548ef27/src/assets/logo_white.png" alt="Find My Device Logo" width="200"></a>
   <br>
   Find My Device
   <br>
