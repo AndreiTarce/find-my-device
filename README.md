@@ -34,7 +34,7 @@ Find My Device
 
 ## Built with
 
-[![My Skills](https://skillicons.dev/icons?i=html,css,js,react,bootstrap,firebase,arduino)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=html,css,js,react,redux,bootstrap,firebase,arduino)](https://skillicons.dev)
 
 ## Credits
 
