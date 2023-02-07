@@ -17,7 +17,7 @@
   <a href="#license">License</a>
 </p>
 
-![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
+![screenshot](https://github.com/AndreiTarce/find-my-device/blob/97f2ecfed9e64764125d26390800b18bc7f70d02/src/assets/find-my-device-readme.gif)
 
 ## Key Features
 
