@@ -9,6 +9,7 @@ import { addSensorData } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
 import { motion } from "framer-motion";
+import RenderClientLocation from "./RenderClientLocation";
 
 // TODO: convert to react firebase hooks
 
@@ -90,10 +91,7 @@ const Map = () => {
                     options={options}
                     key={mapTheme}
                 >
-                    <RenderMapMarker
-                        dateSenzor={[clientLocation]}
-                        theme={mapTheme}
-                    />
+                    <RenderClientLocation location={clientLocation} />
                     <RenderMapMarker
                         dateSenzor={[currentLocation]}
                         theme={mapTheme}
