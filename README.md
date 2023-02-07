@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://raw.githubusercontent.com/AndreiTarce/find-my-device/master/src/assets/logo.png?token=GHSAT0AAAAAAB5OHZOB5PVP4BXHZYLJMWVCY672BPA" alt="Markdownify" width="200"></a>
+  <a href="https://find-my-device-be27c.web.app/dashboard"><img src="https://github.com/AndreiTarce/find-my-device/blob/15286ec5409c5bd5e250fbc666976f6d22dd69ce/src/assets/logo.png" alt="Find My Device Logo" width="200"></a>
   <br>
   Find My Device
   <br>
