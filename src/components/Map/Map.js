@@ -19,6 +19,20 @@ const Map = () => {
     const dispatch = useDispatch();
     const center = useMemo(() => ({ lat: latitude, lng: longitude }));
     const mapTheme = useSelector((state) => state.mapTheme);
+    const [clientLocation, setClientLocation] = useState(null);
+
+    function componentDidMount() {
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(function (position) {
+                setClientLocation({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                });
+                console.log("Latitude is :", position.coords.latitude);
+                console.log("Longitude is :", position.coords.longitude);
+            });
+        }
+    }
 
     const addDateSenzor = (data) => {
         dispatch(addSensorData(data));
@@ -43,6 +57,7 @@ const Map = () => {
                 console.log(error);
             }
         );
+        componentDidMount();
     }, []);
 
     const { isLoaded } = useLoadScript({
@@ -75,7 +90,14 @@ const Map = () => {
                     options={options}
                     key={mapTheme}
                 >
-                    <RenderMapMarker dateSenzor={[currentLocation]} theme={mapTheme} />
+                    <RenderMapMarker
+                        dateSenzor={[clientLocation]}
+                        theme={mapTheme}
+                    />
+                    <RenderMapMarker
+                        dateSenzor={[currentLocation]}
+                        theme={mapTheme}
+                    />
                 </GoogleMap>
             </motion.div>
         );

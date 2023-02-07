@@ -30,7 +30,11 @@ const RenderMapMarker = ({ dateSenzor, theme }) => {
                             lat: parseFloat(data.latitude),
                             lng: parseFloat(data.longitude),
                         }}
-                        icon={theme === DARK ? currentLocationWhite : currentLocation}
+                        icon={
+                            theme === DARK
+                                ? currentLocationWhite
+                                : currentLocation
+                        }
                         animation={google.maps.Animation.BOUNCE}
                     />
                 )
