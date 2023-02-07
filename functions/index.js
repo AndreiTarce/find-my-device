@@ -42,10 +42,7 @@ exports.calculateRouteDistance = functions
     .region("europe-west1")
     .firestore.document("users/{userId}/trips/{docId}")
     .onCreate(async (snap, context) => {
-        // Get an object representing the document
-        // e.g. {'name': 'Marie', 'age': 66}
         const newValue = snap.data();
-        // access a particular field as you would any JS property
         const { startTime, endTime } = newValue;
         const userId = context.params.userId;
         const docId = context.params.docId;
