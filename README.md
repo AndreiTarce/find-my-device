@@ -12,7 +12,7 @@ Find My Device
 
 </h1>
 
-<h4  align="center">A location-tracking application dashboard built for an Arduino location-tracker</a>.</h4>
+<h4  align="center">An application dashboard built for an Arduino location-tracker</a>.</h4>
 
 <p  align="center">
 <a  href="#key-features">Key Features</a> •
