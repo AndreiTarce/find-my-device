@@ -28,7 +28,7 @@ Find My Device
 
 </p>
 
-![screenshot](https://github.com/AndreiTarce/find-my-device/blob/1bdc8071857cf522b6b7dd046c6179f0c8f83f10/src/assets/find-my-device.webm)
+![screenshot](https://github.com/AndreiTarce/find-my-device/blob/d9f41e9de4326f95847be832592c86c174db296e/src/assets/find-my-device.gif)
 
 ## Key Features
 
