@@ -24,7 +24,11 @@ app.post("/", async (req, res) => {
         longitude: sensor_data.longitude,
     };
     await admin.firestore().collection("date_senzor").add(dataToSend);
-    await admin.firestore().collection("date_senzor").doc("current_location").set(dataToSend);
+    await admin
+        .firestore()
+        .collection("date_senzor")
+        .doc("current_location")
+        .set(dataToSend);
     res.status(201).send();
 });
 
@@ -59,14 +63,22 @@ exports.calculateRouteDistance = functions
                     unfilteredLocationArray.push(doc.data());
                 });
             });
-        const filteredLocationArray = unfilteredLocationArray.filter((location) => location.time <= endTime);
+        const filteredLocationArray = unfilteredLocationArray.filter(
+            (location) => location.time <= endTime
+        );
         filteredLocationArray.sort((a, b) => a.time - b.time);
         let totalDistance = 0;
         for (let i = 0; i < filteredLocationArray.length - 1; i++) {
-            const distanceBetweenPoints = haversine_distance(filteredLocationArray[i], filteredLocationArray[i + 1]);
+            const distanceBetweenPoints = haversine_distance(
+                filteredLocationArray[i],
+                filteredLocationArray[i + 1]
+            );
             totalDistance += distanceBetweenPoints;
         }
-        await admin.firestore().doc(`users/${userId}/trips/${docId}`).update({ distanceCovered: totalDistance });
+        await admin
+            .firestore()
+            .doc(`users/${userId}/trips/${docId}`)
+            .update({ distanceCovered: totalDistance });
         // perform desired operations ...
     });
 
@@ -119,7 +131,10 @@ function haversine_distance(mk1, mk2) {
         Math.asin(
             Math.sqrt(
                 Math.sin(difflat / 2) * Math.sin(difflat / 2) +
-                    Math.cos(rlat1) * Math.cos(rlat2) * Math.sin(difflon / 2) * Math.sin(difflon / 2)
+                    Math.cos(rlat1) *
+                        Math.cos(rlat2) *
+                        Math.sin(difflon / 2) *
+                        Math.sin(difflon / 2)
             )
         );
     return d;
