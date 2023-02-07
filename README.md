@@ -15,17 +15,11 @@ Find My Device
 <h4  align="center">A location-tracking application dashboard built for an Arduino location-tracker</a>.</h4>
 
 <p  align="center">
-
 <a  href="#key-features">Key Features</a> •
-
 <a  href="#built-with">Built with</a> •
-
 <a  href="#credits">Credits</a> •
-
 <a  href="#related">Related</a> •
-
 <a  href="#license">License</a>
-
 </p>
 
 ![screenshot](https://github.com/AndreiTarce/find-my-device/blob/d9f41e9de4326f95847be832592c86c174db296e/src/assets/find-my-device.gif)
