@@ -1,3 +1,9 @@
 .transparent {
     opacity: 50%;
 }
+
+.client-location-label {
+    font-weight: 500;
+    padding-top: 65px;
+    font-size: 48px;
+}
