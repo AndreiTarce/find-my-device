@@ -91,7 +91,7 @@ const Map = () => {
                     options={options}
                     key={mapTheme}
                 >
-                    <RenderClientLocation location={clientLocation} />
+                    {clientLocation && <RenderClientLocation location={clientLocation} />}
                     <RenderMapMarker
                         dateSenzor={[currentLocation]}
                         theme={mapTheme}
