@@ -6,6 +6,7 @@ import currentTripHistoryInfoReducer from "./currentTripHistoryInfo";
 import mapActiveReducer from "./mapActive";
 import currentLocationReducer from "./currentLocation";
 import mapThemeTogglerReducer from "./mapThemeToggler";
+import mapCenteredOnReducer from "./mapCenteredOn";
 
 const rootReducer = combineReducers({
     routeRecording: routeRecordingReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     mapActive: mapActiveReducer,
     currentLocation: currentLocationReducer,
     mapTheme: mapThemeTogglerReducer,
+    mapCenter: mapCenteredOnReducer,
 });
 
 export default rootReducer;

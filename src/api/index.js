@@ -1,7 +1,6 @@
 import axios from "axios";
-
-const url = "https://europe-west1-proiect-licenta-632d6.cloudfunctions.net/senzor";
+import { apiUrl } from "./config";
 
 export const deleteTrips = (userId) => {
-    axios.post(`${url}/delete_trips`, { userId });
+    axios.post(`${apiUrl}/delete_trips`, { userId });
 };

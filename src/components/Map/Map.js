@@ -1,6 +1,6 @@
 import { db } from "../../utils/firebase";
 import { onSnapshot, query, doc } from "firebase/firestore";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import { useMemo, useEffect } from "react";
 import "./Map.css";
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
 import { motion } from "framer-motion";
 import RenderClientLocation from "./RenderClientLocation";
+import { Button } from "react-bootstrap";
 
 // TODO: convert to react firebase hooks
 
@@ -18,19 +19,37 @@ const Map = () => {
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
     const dispatch = useDispatch();
-    const center = useMemo(() => ({ lat: latitude, lng: longitude }));
+    const centeredOn = useSelector((state) => state.mapCenter);
     const mapTheme = useSelector((state) => state.mapTheme);
-    const [clientLocation, setClientLocation] = useState(null);
+    const clientLocation = useRef();
+    const memoizedClientLocation = useMemo(
+        () => clientLocation,
+        [clientLocation]
+    );
+
+    const center = useMemo(() => {
+        if (centeredOn === "uncentered") {
+            return {
+                lat: null,
+                lng: null,
+            };
+        }
+        if (centeredOn === "tracker" || Object.keys(centeredOn).length === 0) {
+            return { lat: latitude, lng: longitude };
+        }
+        if (centeredOn === "client") {
+            return {
+                lat: clientLocation.latitude,
+                lng: clientLocation.longitude,
+            };
+        }
+    });
 
     function componentDidMount() {
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition(function (position) {
-                setClientLocation({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
-                });
-                console.log("Latitude is :", position.coords.latitude);
-                console.log("Longitude is :", position.coords.longitude);
+                clientLocation.latitude = position.coords.latitude;
+                clientLocation.longitude = position.coords.longitude;
             });
         }
     }
@@ -90,12 +109,20 @@ const Map = () => {
                     mapContainerClassName="map-container"
                     options={options}
                     key={mapTheme}
+                    onDragStart={() => {
+                        dispatch({ type: "CENTERED_ON_UNCENTERED" });
+                    }}
                 >
-                    {clientLocation && <RenderClientLocation location={clientLocation} />}
+                    {clientLocation && (
+                        <RenderClientLocation
+                            location={memoizedClientLocation}
+                        />
+                    )}
                     <RenderMapMarker
                         dateSenzor={[currentLocation]}
                         theme={mapTheme}
                     />
+                    <Button>test</Button>
                 </GoogleMap>
             </motion.div>
         );

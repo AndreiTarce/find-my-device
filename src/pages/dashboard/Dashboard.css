@@ -1,3 +1,9 @@
 .margin-left {
     margin-left: 1rem;
 }
+
+.dashboard-buttons-container {
+    display: inline-flex;
+    flex-wrap: wrap;
+    row-gap: 1rem;
+}
