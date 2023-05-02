@@ -28,12 +28,17 @@ const Dashboard = () => {
                 <StartRecordingButton />
                 <Button className="margin-left" variant="outline-dark" disabled>
                     Centered on:
-                    <Badge pill bg="primary" className="margin-left">
+                    <Badge pill bg="danger" className="margin-left">
                         {getCenteredOn()}
                     </Badge>
                 </Button>
                 <Button
                     onClick={() => {
+                        window.scrollTo({
+                            top: 0,
+                            left: 0,
+                            behavior: "smooth",
+                        });
                         dispatch({ type: "CENTERED_ON_CLIENT" });
                     }}
                     className="margin-left"
@@ -42,6 +47,11 @@ const Dashboard = () => {
                 </Button>
                 <Button
                     onClick={() => {
+                        window.scrollTo({
+                            top: 0,
+                            left: 0,
+                            behavior: "smooth",
+                        });
                         dispatch({ type: "CENTERED_ON_TRACKER" });
                     }}
                     className="margin-left"
