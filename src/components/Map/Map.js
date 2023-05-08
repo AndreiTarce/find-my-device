@@ -16,11 +16,13 @@ import { Button } from "react-bootstrap";
 
 const Map = () => {
     const currentLocation = useSelector((state) => state.currentLocation);
+    const [mapRef, setMapRef] = useState(null);
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
     const dispatch = useDispatch();
     const centeredOn = useSelector((state) => state.mapCenter);
     const mapTheme = useSelector((state) => state.mapTheme);
+    const freeMoveCenter = useRef();
     const clientLocation = useRef();
     const memoizedClientLocation = useMemo(
         () => clientLocation,
@@ -30,8 +32,8 @@ const Map = () => {
     const center = useMemo(() => {
         if (centeredOn === "uncentered") {
             return {
-                lat: null,
-                lng: null,
+                lat: freeMoveCenter.latitude,
+                lng: freeMoveCenter.longitude,
             };
         }
         if (centeredOn === "tracker" || Object.keys(centeredOn).length === 0) {
@@ -88,6 +90,17 @@ const Map = () => {
         mapId: mapTheme,
     }));
 
+    const handleOnLoad = (map) => {
+        setMapRef(map);
+    };
+
+    const handleDragEnd = () => {
+        if (mapRef) {
+            freeMoveCenter.latitude = mapRef.getCenter().lat();
+            freeMoveCenter.longitude = mapRef.getCenter().lng();
+        }
+    };
+
     //rendering below
     if (!isLoaded) return <LoaderSpinner />;
 
@@ -112,6 +125,8 @@ const Map = () => {
                     onDragStart={() => {
                         dispatch({ type: "CENTERED_ON_UNCENTERED" });
                     }}
+                    onDragEnd={handleDragEnd}
+                    onLoad={handleOnLoad}
                 >
                     {clientLocation && (
                         <RenderClientLocation
