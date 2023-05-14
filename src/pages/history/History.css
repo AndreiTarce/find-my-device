@@ -1,6 +1,7 @@
 .divider {
     height: 1px;
-    background-color: #252525;
+    /* background-color: #252525; */
+    background-color: var(--bs-body-color);
 }
 
 .trip-history-header {

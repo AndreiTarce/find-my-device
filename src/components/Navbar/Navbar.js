@@ -13,8 +13,8 @@ const Navbar = () => {
             sticky="top"
             collapseOnSelect
             expand="lg"
-            bg="dark"
-            variant="dark"
+            // bg="dark"
+            // variant="dark"
         >
             <Container>
                 <BootstrapNavbar.Brand href="/">

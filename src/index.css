@@ -2,3 +2,67 @@
 * {
     font-family: "Inter", sans-serif;
 }
+
+@media (prefers-color-scheme: dark) {
+    * {
+        --bs-body-color: var(--bs-white);
+        .trip-history-header {
+            --bs-body-color: rgba(255, 255, 255, 0.55) !important;
+            --bs-white: rgba(255, 255, 255, 0.55) !important;
+            color: var(--bs-body-color) !important;
+        }
+    }
+    body {
+        background-color: var(--bs-gray-900);
+    }
+
+    #root {
+        --bs-body-bg: var(--bs-gray-900);
+        background-color: var(--bs-body-bg);
+    }
+
+    .dropdown-menu {
+        --bs-dropdown-bg: #292e33 !important;
+        --bs-dropdown-color: white !important;
+        --bs-dropdown-link-color: white !important;
+    }
+
+    .btn {
+        --bs-btn-disabled-border-color: white;
+        --bs-btn-disabled-color: white;
+    }
+    nav {
+        background-color: #292e33;
+        --bs-navbar-color: rgba(255, 255, 255, 0.55) !important;
+        --bs-navbar-hover-color: rgba(255, 255, 255, 0.75) !important;
+        --bs-navbar-disabled-color: rgba(255, 255, 255, 0.25) !important;
+        --bs-navbar-active-color: #fff !important;
+        --bs-navbar-brand-color: #fff !important;
+        --bs-navbar-brand-hover-color: #fff !important;
+        --bs-navbar-toggler-border-color: rgba(255, 255, 255, 0.1) !important;
+        --bs-navbar-toggler-icon-bg: url(data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 30 30%27%3e%3cpath stroke=%27rgba%28255, 255, 255, 0.55%29%27 stroke-linecap=%27round%27 stroke-miterlimit=%2710%27 stroke-width=%272%27 d=%27M4 7h22M4 15h22M4 23h22%27/%3e%3c/svg%3e) !important;
+    }
+
+    .modal-content {
+        --bs-modal-bg: #292e33;
+        --bs-modal-header-border-color: var(--bs-gray-800);
+        --bs-modal-footer-border-color: var(--bs-gray-800);
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    #root {
+        background-color: var(--bs-body-bg);
+    }
+    nav {
+        background-color: #292e33;
+        --bs-navbar-color: rgba(255, 255, 255, 0.55) !important;
+        --bs-navbar-hover-color: rgba(255, 255, 255, 0.75) !important;
+        --bs-navbar-disabled-color: rgba(255, 255, 255, 0.25) !important;
+        --bs-navbar-active-color: #fff !important;
+        --bs-navbar-brand-color: #fff !important;
+        --bs-navbar-brand-hover-color: #fff !important;
+        --bs-navbar-toggler-border-color: rgba(255, 255, 255, 0.1) !important;
+        --bs-navbar-toggler-icon-bg: url(data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 30 30%27%3e%3cpath stroke=%27rgba%28255, 255, 255, 0.55%29%27 stroke-linecap=%27round%27 stroke-miterlimit=%2710%27 stroke-width=%272%27 d=%27M4 7h22M4 15h22M4 23h22%27/%3e%3c/svg%3e) !important;
+    }
+}
