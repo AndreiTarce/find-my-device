@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
 import { motion } from "framer-motion";
 import RenderClientLocation from "./RenderClientLocation";
-import { Button } from "react-bootstrap";
 
 // TODO: convert to react firebase hooks
 
@@ -80,6 +79,7 @@ const Map = () => {
             }
         );
         componentDidMount();
+        dispatch({ type: "CENTERED_ON_TRACKER" });
     }, []);
 
     const { isLoaded } = useLoadScript({
@@ -137,7 +137,6 @@ const Map = () => {
                         dateSenzor={[currentLocation]}
                         theme={mapTheme}
                     />
-                    <Button>test</Button>
                 </GoogleMap>
             </motion.div>
         );
